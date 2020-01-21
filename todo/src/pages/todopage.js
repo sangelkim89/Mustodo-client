@@ -1,13 +1,7 @@
-import React from 'react'
+import React from "react";
 
+const todopage = () => {
+  return <div></div>;
+};
 
-
-class Todopage extends React.Component {
-  render () {
-    return (
-      <p>Todopage</p>
-    )
-  }
-}
-
-export default Todopage;
+export default todopage;
