@@ -1,4 +1,10 @@
-import React from 'react';
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect
+} from "react-router-dom";
 
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import axios from 'axios';
@@ -30,7 +36,7 @@ class App extends React.Component {
 						<Route exact path="/" render={() => <Homepage isLogin={isLogin} />} />
 						<Route path="/login" render={() => <Login handleIsLoginChange={this.handleIsLoginChange} />} />
 						<Route exact path="/signup" render={() => <Signup isLogin={isLogin} />} />
-						<Route exact path="/mypage" render={() => <Mypage isLogin={isLogin} />} />
+						<Route exact path="/mypage" render={() => <Mypage isLogin={isLogin}  />} />
 						<Route exact path="/todopage" render={() => <Todopage />} />
 
 						{/* {!isLogin ? <Redirect from="*" to="/login" /> : <Redirect from="*" to="/" />} */}
@@ -40,5 +46,6 @@ class App extends React.Component {
 		);
 	}
 }
+
 
 export default App;
