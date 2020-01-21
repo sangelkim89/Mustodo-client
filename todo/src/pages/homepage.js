@@ -1,6 +1,5 @@
 import React from "react";
-// import CartIcon from "./images/CartIcon.png";
-//엄준식
+
 class Homepage extends React.Component {
   render() {
     return (
@@ -19,7 +18,11 @@ class Homepage extends React.Component {
             <a href="/signup">signup</a>
           </li>
         </ul>
-        <center>정민님 화해 축하합니다~~~~~</center>
+
+        <center>
+          안녕하세여 아래에 이미지 또는 gif를 추가할 예정이랍니다.
+        </center>
+
       </div>
     );
   }
