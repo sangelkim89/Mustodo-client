@@ -1,5 +1,4 @@
 import React from "react";
-//엄준식
 
 class Homepage extends React.Component {
   render() {
@@ -19,12 +18,13 @@ class Homepage extends React.Component {
             <a href="/signup">signup</a>
           </li>
         </ul>
+
         <center>
           안녕하세여 아래에 이미지 또는 gif를 추가할 예정이랍니다.
         </center>
+
       </div>
     );
   }
 }
-
 export default Homepage;
