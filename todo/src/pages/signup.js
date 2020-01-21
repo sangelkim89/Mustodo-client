@@ -103,5 +103,3 @@ class Signup extends React.Component {
 }
 
 export default withRouter(Signup);
-z;
-
