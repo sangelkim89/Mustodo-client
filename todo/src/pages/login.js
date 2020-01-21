@@ -1,40 +1,36 @@
 import React from "react";
-import { Link, withRouter, Redirect } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import axios from "axios";
+
 axios.defaults.withCredentials = true;
+
 class Login extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: "",
-      password: ""
-    };
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-  }
+  state = {
+    email: "",
+    password: ""
+  };
   handleChange = key => e => {
     this.setState({
       [key]: e.target.value
     });
   };
   handleSubmit = e => {
-    console.log("this.props is: ", this.props);
     e.preventDefault();
     const { email, password } = this.state;
     const { handleIsLoginChange } = this.props;
-    // this.props.history.push("todopage");
-    axios
+
+    return axios
       .post("http://localhost:4000/user/login", {
         email: email,
         password: password
       })
       .then(() => {
         handleIsLoginChange();
-        this.props.history.push("/todopage");
-        // return <Redirect to="/todopage" />;
+        this.props.history.push("/");
       })
       .catch(err => console.log(err));
   };
+
   render() {
     return (
       <>
@@ -61,4 +57,5 @@ class Login extends React.Component {
     );
   }
 }
+
 export default withRouter(Login);
