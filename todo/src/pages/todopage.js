@@ -4,6 +4,8 @@ import TodoTemplate from "./TodoTemplate";
 import TodoInsert from "./TodoInsert";
 import TodoList from "./TodoList";
 import Calendar from "react-calendar";
+import SelectedCalendarData from "./selectedCalendarData";
+import "./calendar.css";
 import { Link, Redirect } from "react-router-dom";
 
 axios.defaults.withCredentials = true;
@@ -15,61 +17,15 @@ class Todopage extends React.Component {
     this.state = {
       todos: [],
       nextID: 0,
+      date: new Date(),
+      CalendarData: [],
       isLogin: this.props.isLogin
     };
     this.plusTodo = this.plusTodo.bind(this);
     this.remove = this.remove.bind(this);
     this.onToggle = this.onToggle.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
-  onChange = async date => {
-    this.setState({ date });
-    // const stateDate = this.state.date;
-    // const sliceDate = stateDate.slice(4, 15);
-    // console.log("Full date: ", date);
-    // console.log("getMonth: ", date.getMonth());
-    let getDate =
-      date.getDate() === 1
-        ? "01"
-        : date.getDate() < 9
-        ? "0" + date.getDate() + ""
-        : date.getDate() + "";
-    let getYear = date.getFullYear() + "";
-    let getMonth =
-      date.getMonth() === 0
-        ? "01"
-        : date.getMonth() < 10
-        ? "0" + (date.getMonth() + 1) + ""
-        : date.getMonth() + 1 + "";
-
-    let chosenDate = getYear + "-" + getMonth + "-" + getDate;
-    // console.log("chosendate: ", chosenDate);
-    let data = { createdAt: chosenDate };
-    // ("2020-01-20");
-    // console.log(data);
-    axios.post("http://localhost:4000/calendar", data).then(res => {
-      console.log("calendar res is: ", res);
-      if (res.data.length > 0) {
-        alert(
-          "first todo: " +
-            res.data[0].todoitem +
-            ". second todo: " +
-            res.data[1].todoitem +
-            "."
-        );
-      } else {
-        alert("Nothing created on this date.");
-      }
-    });
-
-    // console.log("Year: ", getYear);
-    // console.log("Date: ", getDate);
-    // console.log("Month: ", getMonth);
-    // console.log("typeof year: ", typeof getYear);
-    // console.log("typeof month: ", typeof getMonth);
-    // console.log("typeof date: ", typeof getDate);
-    // console.log("typeof chosendate: ", typeof chosenDate);
-  };
-
   onToggle = async id => {
     const { todos } = this.state;
     //💌api 불러와서 토글상태 반대로 만들어주기;;;
@@ -142,11 +98,9 @@ class Todopage extends React.Component {
       todos: filterArray
     });
   };
-
   componentDidMount() {
     //💌😀api에서 todoList요청 불러와서 this.state.Todos에 concat
     //[{},{},{}]
-
     const { todos } = this.state;
     axios
       .get("http://localhost:4000/user/todopage")
@@ -155,45 +109,82 @@ class Todopage extends React.Component {
       })
       .catch(err => console.log(err));
   }
+  // 달력  OnChange//
+  onChange = async date => {
+    const selectedCalendarData = [];
+    this.setState({ date });
+
+    let getDate =
+      date.getDate() === 1
+        ? "01"
+        : date.getDate() < 9
+        ? "0" + date.getDate() + ""
+        : date.getDate() + "";
+    let getYear = date.getFullYear() + "";
+    let getMonth =
+      date.getMonth() === 0
+        ? "01"
+        : date.getMonth() < 10
+        ? "0" + (date.getMonth() + 1) + ""
+        : date.getMonth() + 1 + "";
+
+    let chosenDate = getYear + "-" + getMonth + "-" + getDate;
+
+    let data = { createdAt: chosenDate };
+
+    axios.post("http://localhost:4000/calendar", data).then(res => {
+      if (res.data.length > 0) {
+        this.setState({
+          CalendarData: res.data
+        });
+      } else {
+        alert("Nothing created on this date.");
+      }
+    });
+  };
   render() {
-    const { todos } = this.state;
-    let isLoggedIn = this.props.isLogin;
-    if (isLoggedIn === true) {
-      return (
-        <>
-          <div style={{ padding: "10px", float: "right" }} className="body">
-            <Link
-              className="loginRedirectButton"
-              onClick={this.props.logOut}
-              to="/"
-            >
-              Log Out
-            </Link>
-          </div>
-          <div style={{ padding: "10px", float: "right" }} className="body">
-            <Link className="loginRedirectButton" to="/mypage">
-              My Page
-            </Link>
-          </div>
-          <div style={{ padding: "10px", float: "right" }} className="body">
-            <Link className="loginRedirectButton" to="/loggedhome">
-              Home Page
-            </Link>
-          </div>
-          <Calendar onChange={this.onChange} value={this.state.date} />
-          <TodoTemplate>
-            <TodoInsert plusTodo={this.plusTodo} />
-            <TodoList
-              todos={todos}
-              remove={this.remove}
-              onToggle={this.onToggle}
-            />
-          </TodoTemplate>
-        </>
-      );
-    } else {
-      return <Redirect to="/notloggedin" />;
-    }
+    const { todos, CalendarData } = this.state;
+
+    return (
+      <>
+        <div style={{ padding: "10px", float: "right" }} className="body">
+          <Link
+            className="loginRedirectButton"
+            onClick={this.props.logOut}
+            to="/"
+          >
+            Log Out
+          </Link>
+        </div>
+        <div style={{ padding: "10px", float: "right" }} className="body">
+          <Link className="loginRedirectButton" to="/mypage">
+            My Page
+          </Link>
+        </div>
+        <div style={{ padding: "10px", float: "right" }} className="body">
+          <Link className="loginRedirectButton" to="/loggedhome">
+            Home Page
+          </Link>
+        </div>
+        <div className="header" />
+        <div className="middle">
+          <Calendar
+            className="calendar"
+            onChange={this.onChange}
+            value={this.state.date}
+          />
+          <SelectedCalendarData selectedCalendarData={CalendarData} />
+        </div>
+        <TodoTemplate>
+          <TodoInsert plusTodo={this.plusTodo} />
+          <TodoList
+            todos={todos}
+            remove={this.remove}
+            onToggle={this.onToggle}
+          />
+        </TodoTemplate>
+      </>
+    );
   }
 }
 

@@ -1,5 +1,4 @@
 import React from "react";
-
 import {
   BrowserRouter as Router,
   Route,
@@ -7,7 +6,6 @@ import {
   Redirect
 } from "react-router-dom";
 import axios from "axios";
-
 import Homepage from "../src/pages/homepage";
 import Login from "../src/pages/login";
 import Mypage from "../src/pages/mypage";
@@ -16,9 +14,7 @@ import Todopage from "../src/pages/todopage";
 import Timer from "../src/pages/timer";
 import LoggedInHomepage from "../src/pages/loggedInHomepage";
 import NotLoggedIn from "../src/pages/notLoggedIn";
-
 axios.defaults.withCredentials = true;
-
 class App extends React.Component {
   state = {
     isLogin: false
@@ -27,7 +23,12 @@ class App extends React.Component {
     this.setState({ isLogin: true });
   };
   logOut = () => {
-    this.setState({ isLogin: false });
+    axios
+      .get("http://localhost:4000/user/logout")
+      .then(res => {
+        this.setState({ isLogin: false });
+      })
+      .catch(err => console.log(err));
   };
   render() {
     const { isLogin } = this.state;
@@ -47,10 +48,7 @@ class App extends React.Component {
             <Route
               path="/loggedhome"
               render={() => (
-                <LoggedInHomepage
-                  isLogin={isLogin}
-                  logOut={this.logOut.bind(this)}
-                />
+                <LoggedInHomepage isLogin={isLogin} logOut={this.logOut} />
               )}
             />
             <Route
@@ -67,9 +65,7 @@ class App extends React.Component {
             <Route
               exact
               path="/mypage"
-              render={() => (
-                <Mypage isLogin={isLogin} logOut={this.logOut.bind(this)} />
-              )}
+              render={() => <Mypage isLogin={isLogin} logOut={this.logOut} />}
             />
             <Route
               exact
@@ -79,20 +75,13 @@ class App extends React.Component {
             <Route
               exact
               path="/todopage"
-              render={() => (
-                <Todopage isLogin={isLogin} logOut={this.logOut.bind(this)} />
-              )}
+              render={() => <Todopage isLogin={isLogin} logOut={this.logOut} />}
             />
-            {isLogin ? (
-              <Redirect from="/todopage" to="/todopage" />
-            ) : (
-              <Redirect from="/todopage" to="/notloggedin" />
-            )}
+            {/* {!isLogin ? <Redirect from="*" to="/login" /> : <Redirect from="*" to="/" />} */}
           </Switch>
         </Router>
       </>
     );
   }
 }
-
 export default App;
