@@ -1,0 +1,16 @@
+* {
+	overflow-y: hidden;
+}
+
+.header {
+	position: relative;
+	border-bottom: 3px solid springgreen;
+	bottom: 50px;
+}
+.middle {
+	padding: 0;
+	margin: 0;
+	width: 18.7%;
+	height: 1000px;
+	border: 1px solid red;
+}

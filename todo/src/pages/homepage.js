@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React from 'react';
 
 class Homepage extends React.Component {
@@ -25,7 +24,6 @@ class Homepage extends React.Component {
 			</div>
 		);
 	}
-
 }
 
 export default Homepage;

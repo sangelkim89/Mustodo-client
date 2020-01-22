@@ -9,7 +9,7 @@ import Mypage from '../src/pages/mypage';
 import Signup from '../src/pages/signup';
 import Todopage from '../src/pages/todopage';
 import Timer from '../src/pages/timer';
-
+import './App.css';
 axios.defaults.withCredentials = true;
 
 class App extends React.Component {
@@ -24,10 +24,11 @@ class App extends React.Component {
 		const { isLogin } = this.state;
 		return (
 			<>
-				<a href="/">
-					<h1>Must to do </h1>
-				</a>
 				<Timer />
+				<a href="/">
+					<span className="mustodo">Must to do </span>
+				</a>
+
 				<Router>
 					<Switch>
 						<Route exact path="/" render={() => <Homepage isLogin={isLogin} />} />

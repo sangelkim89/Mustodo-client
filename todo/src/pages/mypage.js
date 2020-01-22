@@ -3,7 +3,6 @@ import { withRouter, Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import './mypage.css';
 import DonutChart from 'react-donut-chart';
-import Calendar from 'react-calendar';
 
 axios.defaults.withCredentials = true;
 
@@ -43,44 +42,7 @@ class Mypage extends React.Component {
 			});
 		});
 	}
-	onChange = async date => {
-		this.setState({ date });
-		// const stateDate = this.state.date;
-		// const sliceDate = stateDate.slice(4, 15);
-		// console.log("Full date: ", date);
-		// console.log("getMonth: ", date.getMonth());
-		let getDate =
-			date.getDate() === 1 ? '01' : date.getDate() < 9 ? '0' + date.getDate() + '' : date.getDate() + '';
-		let getYear = date.getFullYear() + '';
-		let getMonth =
-			date.getMonth() === 0
-				? '01'
-				: date.getMonth() < 10
-				? '0' + (date.getMonth() + 1) + ''
-				: date.getMonth() + 1 + '';
 
-		let chosenDate = getYear + '-' + getMonth + '-' + getDate;
-		// console.log("chosendate: ", chosenDate);
-		let data = { createdAt: chosenDate };
-		// ("2020-01-20");
-		// console.log(data);
-		axios.post('http://localhost:4000/calendar', data).then(res => {
-			console.log('calendar res is: ', res);
-			if (res.data.length > 0) {
-				alert('first todo: ' + res.data[0].todoitem + '. second todo: ' + res.data[1].todoitem + '.');
-			} else {
-				alert('Nothing created on this date.');
-			}
-		});
-
-		// console.log("Year: ", getYear);
-		// console.log("Date: ", getDate);
-		// console.log("Month: ", getMonth);
-		// console.log("typeof year: ", typeof getYear);
-		// console.log("typeof month: ", typeof getMonth);
-		// console.log("typeof date: ", typeof getDate);
-		// console.log("typeof chosendate: ", typeof chosenDate);
-	};
 	handleInputValue = key => e => {
 		// this.setState({ [key]: e.target.value });
 		this.setState({ [key]: e.target.value });
@@ -298,7 +260,6 @@ class Mypage extends React.Component {
 						Edit
 					</button>
 				</div>
-				<Calendar onChange={this.onChange} value={this.state.date} />
 				<div className="statisticsBox">
 					<DonutChart
 						className="donut"

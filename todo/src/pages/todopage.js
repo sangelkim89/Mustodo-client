@@ -3,7 +3,8 @@ import axios from 'axios';
 import TodoTemplate from './TodoTemplate';
 import TodoInsert from './TodoInsert';
 import TodoList from './TodoList';
-
+import Calendar from 'react-calendar';
+import './calendar.css';
 axios.defaults.withCredentials = true;
 
 class Todopage extends React.Component {
@@ -12,11 +13,13 @@ class Todopage extends React.Component {
 
 		this.state = {
 			todos: [],
-			nextID: 0
+			nextID: 0,
+			date: new Date()
 		};
 		this.plusTodo = this.plusTodo.bind(this);
 		this.remove = this.remove.bind(this);
 		this.onToggle = this.onToggle.bind(this);
+		this.onChange = this.onChange.bind(this);
 	}
 	onToggle = async id => {
 		const { todos } = this.state;
@@ -94,11 +97,42 @@ class Todopage extends React.Component {
 			})
 			.catch(err => console.log(err));
 	}
+
+	onChange = async date => {
+		this.setState({ date });
+
+		let getDate =
+			date.getDate() === 1 ? '01' : date.getDate() < 9 ? '0' + date.getDate() + '' : date.getDate() + '';
+		let getYear = date.getFullYear() + '';
+		let getMonth =
+			date.getMonth() === 0
+				? '01'
+				: date.getMonth() < 10
+				? '0' + (date.getMonth() + 1) + ''
+				: date.getMonth() + 1 + '';
+
+		let chosenDate = getYear + '-' + getMonth + '-' + getDate;
+
+		let data = { createdAt: chosenDate };
+
+		axios.post('http://localhost:4000/calendar', data).then(res => {
+			console.log('calendar res is: ', res);
+			if (res.data.length > 0) {
+				alert('first todo: ' + res.data[0].todoitem + '. second todo: ' + res.data[1].todoitem + '.');
+			} else {
+				alert('Nothing created on this date.');
+			}
+		});
+	};
 	render() {
 		const { todos } = this.state;
 
 		return (
 			<>
+				<div className="header" />
+				<div className="middle">
+					<Calendar className="calendar" onChange={this.onChange} value={this.state.date} />
+				</div>
 				<TodoTemplate>
 					<TodoInsert plusTodo={this.plusTodo} />
 					<TodoList todos={todos} remove={this.remove} onToggle={this.onToggle} />
