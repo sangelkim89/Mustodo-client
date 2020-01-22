@@ -1,179 +1,179 @@
 .body {
-  background: white;
+	background: white;
 }
 
 /* 로그아웃 버튼 */
 .loginRedirectButton1 {
-  text-decoration: none;
-  margin: auto;
-  display: inline-block;
-  border-radius: 4px;
-  width: 100px;
-  font-size: 20px;
-  left: 75%;
-  top: 48px; /* top은 화면상 위에서 얼만큼 떨어져있는지 */
-  position: relative;
-  background: #22cfbb;
-  color: white;
-  text-align: center;
+	text-decoration: none;
+	margin: auto;
+	display: inline-block;
+	border-radius: 4px;
+	width: 100px;
+	font-size: 20px;
+	left: 75%;
+	top: 48px; /* top은 화면상 위에서 얼만큼 떨어져있는지 */
+	position: relative;
+	background: #22cfbb;
+	color: white;
+	text-align: center;
 }
 /* todo page 버튼 */
 .loginRedirectButton2 {
-  text-decoration: none;
-  margin: auto;
-  display: inline-block;
-  border-radius: 4px;
-  width: 100px;
-  font-size: 20px;
-  left: 75%;
-  top: 48px;
-  position: relative;
-  background: #22cfbb;
-  color: white;
-  text-align: center;
+	text-decoration: none;
+	margin: auto;
+	display: inline-block;
+	border-radius: 4px;
+	width: 100px;
+	font-size: 20px;
+	left: 75%;
+	top: 48px;
+	position: relative;
+	background: #22cfbb;
+	color: white;
+	text-align: center;
 }
 /* Mypage */
 .myPageTitle {
-  text-decoration: none;
-  margin: auto;
-  border-radius: 4px;
-  width: 700px;
-  height: 50px;
-  font-size: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  top: 0px;
-  position: relative;
-  background: #228dcf;
-  color: white;
-  text-align: center;
+	text-decoration: none;
+	margin: auto;
+	border-radius: 4px;
+	width: 700px;
+	height: 50px;
+	font-size: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	top: 0px;
+	position: relative;
+	background: #228dcf;
+	color: white;
+	text-align: center;
 }
 
 /* User Info */
 .userInfoTitle {
-  text-decoration: none;
-  margin: auto;
-  width: 700px;
-  height: 50px;
-  font-size: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  top: 0px;
-  position: relative;
-  background: #22b8cf;
-  color: white;
-  text-align: center;
+	text-decoration: none;
+	margin: auto;
+	width: 700px;
+	height: 50px;
+	font-size: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	top: 0px;
+	position: relative;
+	background: #22b8cf;
+	color: white;
+	text-align: center;
 }
 
 /* staticstic */
 .userStatisticsTitle {
-  text-decoration: none;
-  margin: auto;
-  width: 700px;
-  height: 50px;
-  font-size: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  top: 0px;
-  position: relative;
-  background: #22b8cf;
-  color: white;
-  text-align: center;
+	text-decoration: none;
+	margin: auto;
+	width: 700px;
+	height: 50px;
+	font-size: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	top: 0px;
+	position: relative;
+	background: #22b8cf;
+	color: white;
+	text-align: center;
 }
 
 /* user name */
 #usernameBox {
-  position: relative;
-  display: inline-block;
-  top: 0px; /* top은 화면상 위에서 얼만큼 떨어져있는지 */
-  left: 25%; /* left은 화면상 왼쪽에서 얼만큼 떨어져있는지 */
-  width: 695px;
-  height: 45px;
-  text-align: center;
-  font-size: 25px;
+	position: relative;
+	display: inline-block;
+	top: 0px; /* top은 화면상 위에서 얼만큼 떨어져있는지 */
+	left: 25%; /* left은 화면상 왼쪽에서 얼만큼 떨어져있는지 */
+	width: 695px;
+	height: 45px;
+	text-align: center;
+	font-size: 25px;
 }
 
 /* email */
 #emailBox {
-  position: relative;
-  display: inline-block;
-  top: 0px; /* top은 화면상 위에서 얼만큼 떨어져있는지 */
-  left: 25%; /* left은 화면상 왼쪽에서 얼만큼 떨어져있는지 */
-  width: 695px;
-  height: 45px;
-  text-align: center;
-  font-size: 25px;
+	position: relative;
+	display: inline-block;
+	top: 0px; /* top은 화면상 위에서 얼만큼 떨어져있는지 */
+	left: 25%; /* left은 화면상 왼쪽에서 얼만큼 떨어져있는지 */
+	width: 695px;
+	height: 45px;
+	text-align: center;
+	font-size: 25px;
 }
 
 /* password */
 #passwordBox {
-  position: relative;
-  display: inline-block;
-  top: 0px; /* top은 화면상 위에서 얼만큼 떨어져있는지 */
-  left: 25%; /* left은 화면상 왼쪽에서 얼만큼 떨어져있는지 */
-  width: 695px;
-  height: 45px;
-  text-align: center;
-  font-size: 25px;
+	position: relative;
+	display: inline-block;
+	top: 0px; /* top은 화면상 위에서 얼만큼 떨어져있는지 */
+	left: 25%; /* left은 화면상 왼쪽에서 얼만큼 떨어져있는지 */
+	width: 695px;
+	height: 45px;
+	text-align: center;
+	font-size: 25px;
 }
 
 /* edit:user name */
 .userEditButton {
-  position: relative;
-  top: 0px;
-  left: 19%;
-  width: 70px;
-  height: 30px;
-  font-size: 20px;
-  color: #ff6b6b;
+	position: relative;
+	top: 0px;
+	left: 19%;
+	width: 70px;
+	height: 30px;
+	font-size: 20px;
+	color: #ff6b6b;
 }
 
 /* edit : email */
 .emailEditButton {
-  position: relative;
-  top: 0px;
-  left: 19%;
-  width: 70px;
-  height: 30px;
-  font-size: 20px;
-  color: #ff6b6b;
+	position: relative;
+	top: 0px;
+	left: 19%;
+	width: 70px;
+	height: 30px;
+	font-size: 20px;
+	color: #ff6b6b;
 }
 /* edit : password */
 .passwordEditButton {
-  position: relative;
-  top: 0px;
-  left: 19%;
-  width: 70px;
-  height: 30px;
-  font-size: 20px;
-  color: #ff6b6b;
+	position: relative;
+	top: 0px;
+	left: 19%;
+	width: 70px;
+	height: 30px;
+	font-size: 20px;
+	color: #ff6b6b;
 }
 
 input:focus {
-  background-color: white;
+	background-color: white;
 }
 input.visited {
-  background-color: white;
+	background-color: white;
 }
 .percent {
-  position: absolute;
-  left: 40%;
-  top: 22%;
-  font-size: 40px;
-  font-style: italic;
+	position: absolute;
+	left: 40%;
+	top: 22%;
+	font-size: 40px;
+	font-style: italic;
 }
 
 /* 그래프 회색 박스 및 그래프 위치 */
 .statisticsBox {
-  top: 0px;
-  display: inline-block;
-  background-color: #ecf0f1;
-  height: 260px;
-  width: 680px;
-  position: relative;
-  left: 25%;
-  padding: 10px;
+	top: 0px;
+	display: inline-block;
+	background-color: #ecf0f1;
+	height: 260px;
+	width: 680px;
+	position: relative;
+	left: 25%;
+	padding: 10px;
 }
