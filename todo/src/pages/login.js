@@ -51,7 +51,7 @@ class Login extends React.Component {
         <div className="loginheader" />
 
         <div className="loginTemplate">
-          <h1>Sign In</h1>
+          <h1>Log In</h1>
           <form onSubmit={this.handleSubmit}>
             <input
               type="email"
@@ -101,6 +101,9 @@ class Login extends React.Component {
               로그인
             </button>
           </form>
+          <div>
+            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1652&q=80" />
+          </div>
         </div>
       </>
     );

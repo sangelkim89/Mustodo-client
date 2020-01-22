@@ -25,7 +25,12 @@ class Signup extends React.Component {
         <div className="signUpLinkBox">
           <div className="signUpLogin">
             <Link style={{ color: "white" }} to="/login">
-              Login Page
+              Log In
+            </Link>
+          </div>
+          <div className="signUpLogin">
+            <Link style={{ color: "white" }} to="/">
+              Home Page
             </Link>
           </div>
         </div>
@@ -36,7 +41,7 @@ class Signup extends React.Component {
             onSubmit={e => {
               e.preventDefault();
               axios
-                .post("http://localhost:4000/user/signup", {
+                .post("http://18.191.193.104:4000/user/signup", {
                   username: username,
                   email: email,
                   password: password
@@ -100,6 +105,9 @@ class Signup extends React.Component {
             </button>
           </form>
         </center>
+        <div>
+          <img src="https://images.unsplash.com/photo-1555099962-4199c345e5dd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80" />
+        </div>
       </>
     );
   }

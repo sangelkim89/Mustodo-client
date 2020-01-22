@@ -8,12 +8,11 @@ import {
 import axios from "axios";
 import Homepage from "../src/pages/homepage";
 import Login from "../src/pages/login";
-import Mypage from "../src/pages/mypage";
+import Mypage from "./pages/mypage";
 import Signup from "../src/pages/signup";
 import Todopage from "../src/pages/todopage";
 import Timer from "../src/pages/timer";
-import LoggedInHomepage from "../src/pages/loggedInHomepage";
-import NotLoggedIn from "../src/pages/notLoggedIn";
+
 axios.defaults.withCredentials = true;
 class App extends React.Component {
   state = {
@@ -24,7 +23,7 @@ class App extends React.Component {
   };
   logOut = () => {
     axios
-      .get("http://localhost:4000/user/logout")
+      .get("http://18.191.193.104:4000/user/logout")
       .then(res => {
         this.setState({ isLogin: false });
       })
@@ -44,13 +43,7 @@ class App extends React.Component {
                 return <Homepage isLogin={isLogin} />;
               }}
             />
-            />
-            <Route
-              path="/loggedhome"
-              render={() => (
-                <LoggedInHomepage isLogin={isLogin} logOut={this.logOut} />
-              )}
-            />
+            /> />
             <Route
               path="/login"
               render={() => (
@@ -67,10 +60,6 @@ class App extends React.Component {
               path="/mypage"
               render={() => <Mypage isLogin={isLogin} logOut={this.logOut} />}
             />
-            <Route
-              exact
-              path="/notloggedin"
-              render={() => <NotLoggedIn isLogin={isLogin} />}
             />
             <Route
               exact
