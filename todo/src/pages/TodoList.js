@@ -4,8 +4,8 @@ import './TodoList.scss';
 const TodoList = ({ todos, remove, onToggle }) => {
 	return (
 		<div className="TodoList">
-			{todos.map(todo => (
-				<TodoListItem todo={todo} key={todo.todoid} remove={remove} onToggle={onToggle} />
+			{todos.map((todo, i) => (
+				<TodoListItem todo={todo} key={i} remove={remove} onToggle={onToggle} />
 			))}
 		</div>
 	);

@@ -1,37 +1,11 @@
+body {
+  overflow-y: auto;
+}
+
 .body {
   background: white;
 }
 
-/* 로그아웃 버튼 */
-.loginRedirectButton1 {
-  text-decoration: none;
-  margin: auto;
-  display: inline-block;
-  border-radius: 4px;
-  width: 100px;
-  font-size: 20px;
-  left: 75%;
-  top: 48px; /* top은 화면상 위에서 얼만큼 떨어져있는지 */
-  position: relative;
-  background: #22cfbb;
-  color: white;
-  text-align: center;
-}
-/* todo page 버튼 */
-.loginRedirectButton2 {
-  text-decoration: none;
-  margin: auto;
-  display: inline-block;
-  border-radius: 4px;
-  width: 100px;
-  font-size: 20px;
-  left: 75%;
-  top: 48px;
-  position: relative;
-  background: #22cfbb;
-  color: white;
-  text-align: center;
-}
 /* Mypage */
 .myPageTitle {
   text-decoration: none;
@@ -66,6 +40,33 @@
   color: white;
   text-align: center;
 }
+/* user name */ /* email */ /* password */
+.editBoxinput {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 25px;
+}
+#editBox {
+  position: relative;
+  display: inline-block;
+  width: 625px;
+  height: 45px;
+  text-align: center;
+  font-size: 25px;
+}
+.EditButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  width: 70px;
+  height: 51px;
+  font-size: 20px;
+  color: #ff6b6b;
+}
 
 /* staticstic */
 .userStatisticsTitle {
@@ -84,74 +85,6 @@
   text-align: center;
 }
 
-/* user name */
-#usernameBox {
-  position: relative;
-  display: inline-block;
-  top: 0px; /* top은 화면상 위에서 얼만큼 떨어져있는지 */
-  left: 25%; /* left은 화면상 왼쪽에서 얼만큼 떨어져있는지 */
-  width: 695px;
-  height: 45px;
-  text-align: center;
-  font-size: 25px;
-}
-
-/* email */
-#emailBox {
-  position: relative;
-  display: inline-block;
-  top: 0px; /* top은 화면상 위에서 얼만큼 떨어져있는지 */
-  left: 25%; /* left은 화면상 왼쪽에서 얼만큼 떨어져있는지 */
-  width: 695px;
-  height: 45px;
-  text-align: center;
-  font-size: 25px;
-}
-
-/* password */
-#passwordBox {
-  position: relative;
-  display: inline-block;
-  top: 0px; /* top은 화면상 위에서 얼만큼 떨어져있는지 */
-  left: 25%; /* left은 화면상 왼쪽에서 얼만큼 떨어져있는지 */
-  width: 695px;
-  height: 45px;
-  text-align: center;
-  font-size: 25px;
-}
-
-/* edit:user name */
-.userEditButton {
-  position: relative;
-  top: 0px;
-  left: 19%;
-  width: 70px;
-  height: 30px;
-  font-size: 20px;
-  color: #ff6b6b;
-}
-
-/* edit : email */
-.emailEditButton {
-  position: relative;
-  top: 0px;
-  left: 19%;
-  width: 70px;
-  height: 30px;
-  font-size: 20px;
-  color: #ff6b6b;
-}
-/* edit : password */
-.passwordEditButton {
-  position: relative;
-  top: 0px;
-  left: 19%;
-  width: 70px;
-  height: 30px;
-  font-size: 20px;
-  color: #ff6b6b;
-}
-
 input:focus {
   background-color: white;
 }
@@ -168,8 +101,11 @@ input.visited {
 
 /* 그래프 회색 박스 및 그래프 위치 */
 .statisticsBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   top: 0px;
-  display: inline-block;
   background-color: #ecf0f1;
   height: 260px;
   width: 680px;

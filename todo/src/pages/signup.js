@@ -22,9 +22,9 @@ class Signup extends React.Component {
     const { username, email, password } = this.state;
     return (
       <div>
-        <div>
+        <div style={{ padding: "10px", float: "right" }} className="body">
           <Link className="loginRedirectButton" to="/login">
-            Login Page
+            Log In
           </Link>
         </div>
         <center>

@@ -1,27 +1,25 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 class Homepage extends React.Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
     return (
       <div>
-        <ul>
-          <li>
-            <a href="/login">login</a>
-          </li>
-          <li>
-            <a href="/mypage">mypage</a>
-          </li>
-          <li>
-            <a href="/todopage">todopage</a>
-          </li>
-          <li>
-            <a href="/signup">signup</a>
-          </li>
-        </ul>
-
-        <center>
-          안녕하세여 아래에 이미지 또는 gif를 추가할 예정이랍니다.
-        </center>
+        <div style={{ padding: "10px", float: "right" }} className="body">
+          <Link className="loginRedirectButton" to="/signup">
+            Sign up
+          </Link>
+          <Link
+            className="loginRedirectButton"
+            onClick={this.props.logOut}
+            to="/login"
+          >
+            Log In
+          </Link>
+        </div>
       </div>
     );
   }
