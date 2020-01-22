@@ -5,8 +5,10 @@ import TodoInsert from "./TodoInsert";
 import TodoList from "./TodoList";
 import Calendar from "react-calendar";
 import SelectedCalendarData from "./selectedCalendarData";
-import "./calendar.css";
+import "./todopage.css";
 import { Link, Redirect } from "react-router-dom";
+import CountTimer from "./countTimer";
+import Weather from "./Weather";
 
 axios.defaults.withCredentials = true;
 
@@ -34,11 +36,11 @@ class Todopage extends React.Component {
       data: {
         data: { todoid, status }
       }
-    } = await axios.post("http://18.191.193.104:4000/todo/info", {
+    } = await axios.post("http://localhost:4000/todo/info", {
       todoid: id
     });
 
-    axios.post("http://18.191.193.104:4000/todo/status", {
+    axios.post("http://localhost:4000/todo/status", {
       todoid: todoid,
       status: !status
     });
@@ -54,23 +56,37 @@ class Todopage extends React.Component {
   plusTodo = async inputTodo => {
     const { todos, nextID } = this.state;
     try {
-      //
+      //시간 가져오기
+      let date = new Date();
+      let year = date.getFullYear();
+      let month = date.getMonth() + 1;
+      let day = date.getUTCDate() + 1;
+      day === 32 ? (day = 1) : (day = day);
+      month === 13 ? (month = 1) : (month = month);
+
+      let time = `${year}-${month < 10 ? `0${month}` : month}-${
+        day < 10 ? `0${day}` : day
+      }`;
+
+      console.log(time); //2020-01-23 04:22:56
+
       //💌login 중인 userId가져오기
       const {
         data: { id }
-      } = await axios.post("http://18.191.193.104:4000/user/getid");
+      } = await axios.post("http://localhost:4000/user/getid");
 
       //💌todo 추가된 거 api로 보내userId 넣어서 보내주기
-      await axios.post("http://18.191.193.104:4000/todo/add", {
+      await axios.post("http://localhost:4000/todo/add", {
         userid: id,
-        todoid: nextID,
+        todoid: nextID + inputTodo,
         todoitem: inputTodo,
-        status: false
+        status: false,
+        time: time
       });
       //😀this.state  관리 하는 부분
       const nextTodo = {
         userid: id,
-        todoid: nextID,
+        todoid: nextID + inputTodo,
         todoitem: inputTodo,
         status: false
       };
@@ -85,7 +101,7 @@ class Todopage extends React.Component {
   };
   remove = (...arr) => {
     //💌api에서 같은 아이디 찾아서 삭제해주기
-    axios.post("http://18.191.193.104:4000/todo/delete", {
+    axios.post("http://localhost:4000/todo/delete", {
       todoid: arr[0][0],
       todoitem: arr[0][1]
     });
@@ -103,7 +119,7 @@ class Todopage extends React.Component {
     //[{},{},{}]
     const { todos } = this.state;
     axios
-      .get("http://18.191.193.104:4000/user/todopage")
+      .get("http://localhost:4000/user/todopage")
       .then(res => {
         this.setState({ todos: todos.concat(res.data) });
       })
@@ -120,6 +136,7 @@ class Todopage extends React.Component {
         : date.getDate() < 9
         ? "0" + date.getDate() + ""
         : date.getDate() + "";
+    console.log(getDate);
     let getYear = date.getFullYear() + "";
     let getMonth =
       date.getMonth() === 0
@@ -130,9 +147,9 @@ class Todopage extends React.Component {
 
     let chosenDate = getYear + "-" + getMonth + "-" + getDate;
 
-    let data = { createdAt: chosenDate };
-
-    axios.post("http://18.191.193.104:4000/calendar", data).then(res => {
+    let data = { time: chosenDate };
+    console.log(data);
+    axios.post("http://localhost:4000/calendar", data).then(res => {
       if (res.data.length > 0) {
         this.setState({
           CalendarData: res.data
@@ -147,25 +164,24 @@ class Todopage extends React.Component {
 
     return (
       <>
-        <div style={{ padding: "10px", float: "right" }} className="body">
-          <Link
-            className="loginRedirectButton"
-            onClick={this.props.logOut}
-            to="/"
-          >
-            Log Out
-          </Link>
+        <div className="linkBox">
+          <div className="linkLogout">
+            <Link style={{ color: "white" }} onClick={this.props.logOut} to="/">
+              Log Out
+            </Link>
+          </div>
+          <div className="linkMypage">
+            <Link style={{ color: "white" }} to="/mypage">
+              My Page
+            </Link>
+          </div>
+          <div className="linkLoggedHome">
+            <Link style={{ color: "white" }} to="/">
+              Home Page
+            </Link>
+          </div>
         </div>
-        <div style={{ padding: "10px", float: "right" }} className="body">
-          <Link className="loginRedirectButton" to="/mypage">
-            My Page
-          </Link>
-        </div>
-        <div style={{ padding: "10px", float: "right" }} className="body">
-          <Link className="loginRedirectButton" to="/loggedhome">
-            Home Page
-          </Link>
-        </div>
+
         <div className="header" />
         <div className="middle">
           <Calendar
@@ -175,6 +191,8 @@ class Todopage extends React.Component {
           />
           <SelectedCalendarData selectedCalendarData={CalendarData} />
         </div>
+        <CountTimer />
+        <Weather />
         <TodoTemplate>
           <TodoInsert plusTodo={this.plusTodo} />
           <TodoList

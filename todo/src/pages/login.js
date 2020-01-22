@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import axios from "axios";
-
+import "./login.css";
 axios.defaults.withCredentials = true;
 
 class Login extends React.Component {
@@ -36,25 +36,72 @@ class Login extends React.Component {
   render() {
     return (
       <>
-        <h1>Sign In</h1>
-        <form onSubmit={this.handleSubmit}>
-          <input
-            placeholder={"이메일"}
-            value={this.state.email}
-            onChange={this.handleChange("email")}
-          />
-          <div>
+        <div className="LoginLinkBox">
+          <div className="signUp">
+            <Link style={{ color: "white" }} to="/signup">
+              Sign up
+            </Link>
+          </div>
+          <div className="HomePage">
+            <Link style={{ color: "white" }} to="/">
+              Home Page
+            </Link>
+          </div>
+        </div>
+        <div className="loginheader" />
+
+        <div className="loginTemplate">
+          <h1>Sign In</h1>
+          <form onSubmit={this.handleSubmit}>
             <input
-              placeholder={"비밀번호"}
-              value={this.state.password}
-              onChange={this.handleChange("password")}
+              type="email"
+              style={{
+                width: "400px",
+                height: "30px",
+                margin: "5px",
+                borderRadius: "5px"
+              }}
+              placeholder={"이메일"}
+              value={this.state.email}
+              onChange={this.handleChange("email")}
             />
-          </div>
-          <div>
-            <Link to="/signup">아직 아이디가 없으신가요?</Link>
-          </div>
-          <button type="submit">로그인</button>
-        </form>
+            <div>
+              <input
+                type="password"
+                style={{
+                  width: "400px",
+                  height: "30px",
+                  margin: "5px",
+                  borderRadius: "5px"
+                }}
+                placeholder={"비밀번호"}
+                value={this.state.password}
+                onChange={this.handleChange("password")}
+              />
+            </div>
+            <div>
+              <Link
+                style={{ color: " #eb4d4b" }}
+                className="signUpButton"
+                to="/signup"
+              >
+                아직 아이디가 없으신가요?
+              </Link>
+            </div>
+            <button
+              style={{
+                width: "200px",
+                height: "30px",
+                margin: "5px",
+                borderRadius: "5px",
+                backgroundColor: " #eb4d4b"
+              }}
+              type="submit"
+            >
+              로그인
+            </button>
+          </form>
+        </div>
       </>
     );
   }

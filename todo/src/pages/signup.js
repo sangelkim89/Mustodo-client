@@ -21,14 +21,22 @@ class Signup extends React.Component {
   render() {
     const { username, email, password } = this.state;
     return (
-      <div className="body">
-        <center>
+      <>
+        <div className="signUpLinkBox">
+          <div className="signUpLogin">
+            <Link style={{ color: "white" }} to="/login">
+              Login Page
+            </Link>
+          </div>
+        </div>
+        <div className="signUpheader" />
+        <center className="signUpTemplate">
           <h1>Sign Up</h1>
           <form
             onSubmit={e => {
               e.preventDefault();
               axios
-                .post("http://18.191.193.104:4000/user/signup", {
+                .post("http://localhost:4000/user/signup", {
                   username: username,
                   email: email,
                   password: password
@@ -43,13 +51,12 @@ class Signup extends React.Component {
               <input
                 style={{
                   width: "400px",
-                  height: "40px",
-                  marginTop: "30px",
-                  marginBottom: "30px",
+                  height: "30px",
+                  margin: "5px",
                   borderRadius: "5px"
                 }}
                 type="username"
-                placeholder="Username"
+                placeholder="사용자 아이디를 입력 해주세요"
                 onChange={this.handleInputValue("username")}
               ></input>
             </div>
@@ -57,12 +64,12 @@ class Signup extends React.Component {
               <input
                 style={{
                   width: "400px",
-                  height: "40px",
-                  marginBottom: "30px",
+                  height: "30px",
+                  margin: "5px",
                   borderRadius: "5px"
                 }}
                 type="email"
-                placeholder="Email"
+                placeholder="이메일을 입력 해주세요"
                 onChange={this.handleInputValue("email")}
               ></input>
             </div>
@@ -70,45 +77,30 @@ class Signup extends React.Component {
               <input
                 style={{
                   width: "400px",
-                  height: "40px",
-                  marginBottom: "30px",
+                  height: "30px",
+                  margin: "5px",
                   borderRadius: "5px"
                 }}
                 onChange={this.handleInputValue("password")}
                 type="password"
-                placeholder="Password"
+                placeholder="비밀번호를 입력 해주세요"
               ></input>
             </div>
             <button
               style={{
                 width: "200px",
-                height: "40px",
+                height: "30px",
                 margin: "5px",
-                borderRadius: "10px",
-                backgroundColor: "skyblue"
+                borderRadius: "5px",
+                backgroundColor: "#eb4d4b"
               }}
               type="submit"
             >
-              Create!
-            </button>
-            <button
-              style={{
-                width: "200px",
-                height: "40px",
-                margin: "5px",
-                borderRadius: "10px",
-                backgroundColor: "skyblue"
-              }}
-              type="submit"
-              onClick={() => {
-                this.props.history.push("/login");
-              }}
-            >
-              Login Page
+              회원가입
             </button>
           </form>
         </center>
-      </div>
+      </>
     );
   }
 }

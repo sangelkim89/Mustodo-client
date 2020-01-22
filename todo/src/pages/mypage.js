@@ -3,14 +3,9 @@ import { withRouter, Link, useHistory, Redirect } from "react-router-dom";
 import axios from "axios";
 import "./mypage.css";
 import DonutChart from "react-donut-chart";
-//import Calendar from "react-calendar";
+
 axios.defaults.withCredentials = true;
-//data =
-// {
-//   userinfo:{},
-//   todoCount: int,
-//   completeCount: int
-// }
+
 class Mypage extends React.Component {
   //dont forget to rupdate states with props!
   constructor(props) {
@@ -36,7 +31,7 @@ class Mypage extends React.Component {
     this.passwordEditButtonRef = React.createRef();
   }
   componentDidMount() {
-    axios.get("http://18.191.193.104:4000/user/mypage").then(res => {
+    axios.get("http://localhost:4000/user/mypage").then(res => {
       console.log("res is: ", res);
       this.setState({
         // userinfo: res.userinfo,
@@ -70,7 +65,7 @@ class Mypage extends React.Component {
       let data = { username: this.state.username };
       console.log("sending axios.put request with data: ", data);
       axios
-        .put("http://18.191.193.104:4000/user/edit", data)
+        .put("http://localhost:4000/user/edit", data)
         .then(() => {
           console.log("username changed");
         })
@@ -95,7 +90,7 @@ class Mypage extends React.Component {
       this.emailRef.current.style.backgroundColor = "#ECF0F1";
       let data = { email: this.state.email };
       try {
-        axios.put("http://18.191.193.104:4000/user/edit", data);
+        axios.put("http://localhost:4000/user/edit", data);
         console.log(
           "after editing email, new this.state.email is: ",
           this.state.email
@@ -119,7 +114,7 @@ class Mypage extends React.Component {
       this.passwordRef.current.style.backgroundColor = "#ECF0F1";
       let data = { password: this.state.password };
       try {
-        axios.put("http://18.191.193.104:4000/user/edit", data);
+        axios.put("http://localhost:4000/user/edit", data);
       } catch (error) {
         console.log(error);
       }
@@ -152,16 +147,9 @@ class Mypage extends React.Component {
       let changeData = {
         [key]: e.target.value
       };
-      // console.log("changeData is: ", changeData);
-      // console.log("e is: ", e);
-      // axios
-      //   .put("http://18.191.193.104:4000/user/edit", changeData)
-      //   .then(res => {
-      //     this.setState({ [key]: e.target.value });
-      //   })
-      //   .catch(err => console.log(err));
+
       try {
-        axios.put("http://18.191.193.104:4000/user/edit", changeData);
+        axios.put("http://localhost:4000/user/edit", changeData);
       } catch (error) {
         console.log(error);
       }
@@ -186,33 +174,27 @@ class Mypage extends React.Component {
   };
   render() {
     return (
-      <div className="body">
-        <div style={{ padding: "10px", float: "right" }} className="body">
-          <Link
-            className="loginRedirectButton"
-            onClick={this.props.logOut}
-            to="/"
-          >
-            Log Out
-          </Link>
+      <>
+        <div className="myPageLinkBox">
+          <div className="myPageHomePage">
+            <Link style={{ color: "white" }} onClick={this.props.logOut} to="/">
+              HomePage
+            </Link>
+          </div>
+
+          <div className="myPageTodoPage">
+            <Link style={{ color: "white" }} to="/todopage">
+              Todo Page
+            </Link>
+          </div>
         </div>
-        <div style={{ padding: "10px", float: "right" }} className="body">
-          <Link className="loginRedirectButton" to="/loggedhome">
-            Home Page
-          </Link>
-        </div>
-        <div style={{ padding: "10px", float: "right" }} className="body">
-          <Link className="loginRedirectButton" to="/todopage">
-            Todo Page
-          </Link>
-        </div>
-        <div className="body">
+
+        <div className="fatherBox">
           <div className="myPageTitle">My Page</div>
-        </div>
-        <div className="userInfoTitle">User Info</div>
-        {/* ㅁ */}
-        <div className="body">
-          <div>
+
+          <div className="userInfoTitle">User Info</div>
+          {/* ㅁ */}
+          <div className="editInputButtonFatherBox">
             <input
               type="text"
               placeholder={this.state.username}
@@ -223,17 +205,18 @@ class Mypage extends React.Component {
               onFocus={this.clearUsernameFocus()}
               onBlur={this.onUsernameBlur()}
               onKeyUp={this.setUserInfo("username")}
+              className="userEditInput"
             ></input>
             <button
               type="button"
-              className="userEditButton"
+              className="hoverButton userEditButton"
               ref={this.userEditButtonRef}
               onClick={this.handleUserEditValue()}
             >
               Edit
             </button>
           </div>
-          <div>
+          <div className="editInputButtonFatherBox">
             <input
               type="text"
               placeholder={this.state.email}
@@ -244,40 +227,43 @@ class Mypage extends React.Component {
               onFocus={this.clearEmailFocus()}
               onBlur={this.onEmailBlur()}
               onKeyUp={this.setUserInfo("email")}
+              className="emailEditInput"
             ></input>
             <button
               type="button"
-              className="emailEditButton"
+              className="hoverButton emailEditButton"
               ref={this.emailEditButtonRef}
               onClick={this.handleEmailEditValue()}
             >
               Edit
             </button>
           </div>
-          <input
-            type="text"
-            placeholder={this.state.password}
-            id="passwordBox"
-            onChange={this.handleInputValue("password")}
-            ref={this.passwordRef}
-            disabled
-            onFocus={this.clearPasswordFocus()}
-            onBlur={this.onPasswordBlur()}
-            onKeyUp={this.setUserInfo("password")}
-          ></input>
-          <button
-            type="button"
-            className="passwordEditButton"
-            ref={this.passwordEditButtonRef}
-            onClick={this.handlePasswordEditValue()}
-          >
-            Edit
-          </button>
-        </div>
-        {/* ㅁ */}
-        <div className="userStatisticsTitle">Statistics</div>
-        {/* 아래는 그래프 부분입니다. 참고하세요 */}
-        <div className="body">
+          <div className="editInputButtonFatherBox">
+            <input
+              type="text"
+              placeholder={this.state.password}
+              id="passwordBox"
+              onChange={this.handleInputValue("password")}
+              ref={this.passwordRef}
+              disabled
+              onFocus={this.clearPasswordFocus()}
+              onBlur={this.onPasswordBlur()}
+              onKeyUp={this.setUserInfo("password")}
+              className="passwordEditInput"
+            ></input>
+            <button
+              type="button"
+              className="hoverButton passwordEditButton"
+              ref={this.passwordEditButtonRef}
+              onClick={this.handlePasswordEditValue()}
+            >
+              Edit
+            </button>
+          </div>
+          {/* ㅁ */}
+          <div className="userStatisticsTitle">Statistics</div>
+          {/* 아래는 그래프 부분입니다. 참고하세요 */}
+
           <div align="center" className="statisticsBox">
             <DonutChart
               width={400}
@@ -297,10 +283,11 @@ class Mypage extends React.Component {
             />
             <h4 align="center">작성한 Mustodo 수: {this.state.todoCount}</h4>
           </div>
+
+          {/* 그래프 끝 */}
+          {/* <Calendar onChange={this.onChange} value={this.state.date} /> */}
         </div>
-        {/* 그래프 끝 */}
-        {/* <Calendar onChange={this.onChange} value={this.state.date} /> */}
-      </div>
+      </>
     );
   }
 }
