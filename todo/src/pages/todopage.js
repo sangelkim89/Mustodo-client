@@ -4,6 +4,7 @@ import TodoTemplate from "./TodoTemplate";
 import TodoInsert from "./TodoInsert";
 import TodoList from "./TodoList";
 import Calendar from "react-calendar";
+import { Link, Redirect } from "react-router-dom";
 
 axios.defaults.withCredentials = true;
 
@@ -13,7 +14,8 @@ class Todopage extends React.Component {
 
     this.state = {
       todos: [],
-      nextID: 0
+      nextID: 0,
+      isLogin: this.props.isLogin
     };
     this.plusTodo = this.plusTodo.bind(this);
     this.remove = this.remove.bind(this);
@@ -153,20 +155,43 @@ class Todopage extends React.Component {
   }
   render() {
     const { todos } = this.state;
-
-    return (
-      <>
-        <Calendar onChange={this.onChange} value={this.state.date} />
-        <TodoTemplate>
-          <TodoInsert plusTodo={this.plusTodo} />
-          <TodoList
-            todos={todos}
-            remove={this.remove}
-            onToggle={this.onToggle}
-          />
-        </TodoTemplate>
-      </>
-    );
+    let isLoggedIn = this.state.isLogin;
+    if (isLoggedIn) {
+      return (
+        <>
+          <div style={{ padding: "10px", float: "right" }} className="body">
+            <Link
+              className="loginRedirectButton"
+              onClick={this.props.logOut}
+              to="/"
+            >
+              Log Out
+            </Link>
+          </div>
+          <div style={{ padding: "10px", float: "right" }} className="body">
+            <Link className="loginRedirectButton" to="/mypage">
+              My Page
+            </Link>
+          </div>
+          <div style={{ padding: "10px", float: "right" }} className="body">
+            <Link className="loginRedirectButton" to="/loggedhome">
+              Home Page
+            </Link>
+          </div>
+          <Calendar onChange={this.onChange} value={this.state.date} />
+          <TodoTemplate>
+            <TodoInsert plusTodo={this.plusTodo} />
+            <TodoList
+              todos={todos}
+              remove={this.remove}
+              onToggle={this.onToggle}
+            />
+          </TodoTemplate>
+        </>
+      );
+    } else {
+      return <Redirect to="/notloggedin" />;
+    }
   }
 }
 

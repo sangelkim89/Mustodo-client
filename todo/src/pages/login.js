@@ -1,5 +1,3 @@
-
-
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import axios from "axios";
@@ -26,9 +24,11 @@ class Login extends React.Component {
         email: email,
         password: password
       })
-      .then(() => {
-        handleIsLoginChange();
-        this.props.history.push("/");
+      .then(res => {
+        if (res.status === 200) {
+          handleIsLoginChange();
+          this.props.history.push("/todopage");
+        }
       })
       .catch(err => console.log(err));
   };

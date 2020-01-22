@@ -14,6 +14,8 @@ import Mypage from "../src/pages/mypage";
 import Signup from "../src/pages/signup";
 import Todopage from "../src/pages/todopage";
 import Timer from "../src/pages/timer";
+import LoggedInHomepage from "../src/pages/loggedInHomepage";
+import NotLoggedIn from "../src/pages/notLoggedIn";
 
 axios.defaults.withCredentials = true;
 
@@ -24,21 +26,32 @@ class App extends React.Component {
   handleIsLoginChange = () => {
     this.setState({ isLogin: true });
   };
-
+  logOut = () => {
+    this.setState({ isLogin: false });
+  };
   render() {
     const { isLogin } = this.state;
     return (
       <>
-        <a href="/">
-          <h1>Must to do </h1>
-        </a>
         <Timer />
         <Router>
           <Switch>
             <Route
               exact
               path="/"
-              render={() => <Homepage isLogin={isLogin} />}
+              render={() => {
+                return <Homepage isLogin={isLogin} />;
+              }}
+            />
+            />
+            <Route
+              path="/loggedhome"
+              render={() => (
+                <LoggedInHomepage
+                  isLogin={isLogin}
+                  logOut={this.logOut.bind(this)}
+                />
+              )}
             />
             <Route
               path="/login"
@@ -54,10 +67,22 @@ class App extends React.Component {
             <Route
               exact
               path="/mypage"
-              render={() => <Mypage isLogin={isLogin} />}
+              render={() => (
+                <Mypage isLogin={isLogin} logOut={this.logOut.bind(this)} />
+              )}
             />
-            <Route exact path="/todopage" render={() => <Todopage />} />
-
+            <Route
+              exact
+              path="/notloggedin"
+              render={() => <NotLoggedIn isLogin={isLogin} />}
+            />
+            <Route
+              exact
+              path="/todopage"
+              render={() => (
+                <Todopage isLogin={isLogin} logOut={this.logOut.bind(this)} />
+              )}
+            />
             {/* {!isLogin ? <Redirect from="*" to="/login" /> : <Redirect from="*" to="/" />} */}
           </Switch>
         </Router>
