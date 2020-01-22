@@ -2,7 +2,9 @@ import React from 'react';
 import { withRouter, Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import './signup.css';
+
 axios.defaults.withCredentials = true;
+
 class Signup extends React.Component {
 	constructor(props) {
 		super(props);
@@ -99,4 +101,5 @@ class Signup extends React.Component {
 		);
 	}
 }
+
 export default withRouter(Signup);

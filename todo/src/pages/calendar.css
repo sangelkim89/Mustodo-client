@@ -4,7 +4,7 @@
 
 .header {
 	position: relative;
-	border-bottom: 3px solid springgreen;
+	border-bottom: 0.5px solid #dff9fb;
 	bottom: 50px;
 }
 .middle {
@@ -12,5 +12,6 @@
 	margin: 0;
 	width: 18.7%;
 	height: 1000px;
-	border: 1px solid red;
+	border: 4px solid #535c68;
+	border-radius: 10px;
 }

@@ -4,7 +4,9 @@ import TodoTemplate from './TodoTemplate';
 import TodoInsert from './TodoInsert';
 import TodoList from './TodoList';
 import Calendar from 'react-calendar';
+import SelectedCalendarData from './selectedCalendarData';
 import './calendar.css';
+
 axios.defaults.withCredentials = true;
 
 class Todopage extends React.Component {
@@ -14,7 +16,8 @@ class Todopage extends React.Component {
 		this.state = {
 			todos: [],
 			nextID: 0,
-			date: new Date()
+			date: new Date(),
+			CalendarData: []
 		};
 		this.plusTodo = this.plusTodo.bind(this);
 		this.remove = this.remove.bind(this);
@@ -97,8 +100,9 @@ class Todopage extends React.Component {
 			})
 			.catch(err => console.log(err));
 	}
-
+	// 달력  OnChange//
 	onChange = async date => {
+		const selectedCalendarData = [];
 		this.setState({ date });
 
 		let getDate =
@@ -116,22 +120,24 @@ class Todopage extends React.Component {
 		let data = { createdAt: chosenDate };
 
 		axios.post('http://localhost:4000/calendar', data).then(res => {
-			console.log('calendar res is: ', res);
 			if (res.data.length > 0) {
-				alert('first todo: ' + res.data[0].todoitem + '. second todo: ' + res.data[1].todoitem + '.');
+				this.setState({
+					CalendarData: res.data
+				});
 			} else {
 				alert('Nothing created on this date.');
 			}
 		});
 	};
 	render() {
-		const { todos } = this.state;
+		const { todos, CalendarData } = this.state;
 
 		return (
 			<>
 				<div className="header" />
 				<div className="middle">
 					<Calendar className="calendar" onChange={this.onChange} value={this.state.date} />
+					<SelectedCalendarData selectedCalendarData={CalendarData} />
 				</div>
 				<TodoTemplate>
 					<TodoInsert plusTodo={this.plusTodo} />
