@@ -5,8 +5,10 @@ import TodoInsert from './TodoInsert';
 import TodoList from './TodoList';
 import Calendar from 'react-calendar';
 import SelectedCalendarData from './selectedCalendarData';
-import './calendar.css';
+import './todopage.css';
 import { Link, Redirect } from 'react-router-dom';
+import CountTimer from './countTimer';
+import Weather from './Weather';
 
 axios.defaults.withCredentials = true;
 
@@ -136,21 +138,24 @@ class Todopage extends React.Component {
 
 		return (
 			<>
-				<div style={{ padding: '10px', float: 'right' }} className="body">
-					<Link className="loginRedirectButton" onClick={this.props.logOut} to="/">
-						Log Out
-					</Link>
+				<div className="linkBox">
+					<div className="linkLogout">
+						<Link style={{ color: 'white' }} onClick={this.props.logOut} to="/">
+							Log Out
+						</Link>
+					</div>
+					<div className="linkMypage">
+						<Link style={{ color: 'white' }} to="/mypage">
+							My Page
+						</Link>
+					</div>
+					<div className="linkLoggedHome">
+						<Link style={{ color: 'white' }} to="/loggedhome">
+							Home Page
+						</Link>
+					</div>
 				</div>
-				<div style={{ padding: '10px', float: 'right' }} className="body">
-					<Link className="loginRedirectButton" to="/mypage">
-						My Page
-					</Link>
-				</div>
-				<div style={{ padding: '10px', float: 'right' }} className="body">
-					<Link className="loginRedirectButton" to="/loggedhome">
-						Home Page
-					</Link>
-				</div>
+
 				<div className="header" />
 				<div className="middle">
 					<Calendar className="calendar" onChange={this.onChange} value={this.state.date} />
@@ -160,6 +165,8 @@ class Todopage extends React.Component {
 					<TodoInsert plusTodo={this.plusTodo} />
 					<TodoList todos={todos} remove={this.remove} onToggle={this.onToggle} />
 				</TodoTemplate>
+				<CountTimer />
+				<Weather />
 			</>
 		);
 	}

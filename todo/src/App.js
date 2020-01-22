@@ -29,7 +29,7 @@ class App extends React.Component {
 		const { isLogin } = this.state;
 		return (
 			<>
-				<Timer />
+				{/* <Timer /> */}
 				<Router>
 					<Switch>
 						<Route
@@ -48,11 +48,7 @@ class App extends React.Component {
 						<Route exact path="/signup" render={() => <Signup isLogin={isLogin} />} />
 						<Route exact path="/mypage" render={() => <Mypage isLogin={isLogin} logOut={this.logOut} />} />
 						<Route exact path="/notloggedin" render={() => <NotLoggedIn isLogin={isLogin} />} />
-						<Route
-							exact
-							path="/todopage"
-							render={() => <Todopage isLogin={isLogin} logOut={this.logOut} />}
-						/>
+						<Route exact path="/todopage" render={() => <Todopage logOut={this.logOut} />} />
 						{/* {!isLogin ? <Redirect from="*" to="/login" /> : <Redirect from="*" to="/" />} */}
 					</Switch>
 				</Router>
