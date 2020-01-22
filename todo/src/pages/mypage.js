@@ -1,6 +1,5 @@
-
 import React from "react";
-import { withRouter, Link, useHistory } from "react-router-dom";
+import { withRouter, Link, useHistory, Redirect } from "react-router-dom";
 import axios from "axios";
 import "./mypage.css";
 import DonutChart from "react-donut-chart";
@@ -27,7 +26,8 @@ class Mypage extends React.Component {
       username: "username",
       email: "email",
       password: "password",
-      date: new Date()
+      date: new Date(),
+      isLogin: this.props.isLogin
     };
     this.handleInputValue = this.handleInputValue.bind(this);
     this.setUserInfo = this.setUserInfo.bind(this);
@@ -161,16 +161,14 @@ class Mypage extends React.Component {
         [key]: e.target.value
       };
 
-
-			// console.log("changeData is: ", changeData);
-			// console.log("e is: ", e);
-			// axios
-			//   .put("http://localhost:4000/user/edit", changeData)
-			//   .then(res => {
-			//     this.setState({ [key]: e.target.value });
-			//   })
-			//   .catch(err => console.log(err));
-
+      // console.log("changeData is: ", changeData);
+      // console.log("e is: ", e);
+      // axios
+      //   .put("http://localhost:4000/user/edit", changeData)
+      //   .then(res => {
+      //     this.setState({ [key]: e.target.value });
+      //   })
+      //   .catch(err => console.log(err));
 
       try {
         axios.put("http://localhost:4000/user/edit", changeData);
@@ -198,126 +196,135 @@ class Mypage extends React.Component {
   };
 
   render() {
-    let number = (
-      (this.state.completeCount / this.state.todoCount) *
-      100
-    ).toString();
-    return (
-      <div className="body">
-        <div>
-          <Link className="loginRedirectButton1" to="/login">
-            로그아웃
-          </Link>
-        </div>
-        <div>
-          <Link className="loginRedirectButton2" to="/todopage">
-            Todo Page
-          </Link>
-        </div>
+    let isLoggedIn = this.state.isLogin;
+    if (isLoggedIn) {
+      return (
+        <div className="body">
+          <div style={{ padding: "10px", float: "right" }} className="body">
+            <Link
+              className="loginRedirectButton"
+              onClick={this.props.logOut}
+              to="/"
+            >
+              Log Out
+            </Link>
+          </div>
+          <div style={{ padding: "10px", float: "right" }} className="body">
+            <Link className="loginRedirectButton" to="/loggedhome">
+              Home Page
+            </Link>
+          </div>
+          <div style={{ padding: "10px", float: "right" }} className="body">
+            <Link className="loginRedirectButton" to="/todopage">
+              Todo Page
+            </Link>
+          </div>
 
-        <div className="body">
-          <div className="myPageTitle">My Page</div>
-        </div>
-        <div className="userInfoTitle">User Info</div>
-        {/* ㅁ */}
-        <div className="body">
-          <div>
+          <div className="body">
+            <div className="myPageTitle">My Page</div>
+          </div>
+          <div className="userInfoTitle">User Info</div>
+          {/* ㅁ */}
+          <div className="body">
+            <div>
+              <input
+                type="text"
+                placeholder={this.state.username}
+                id="usernameBox"
+                onChange={this.handleInputValue("username")}
+                ref={this.userRef}
+                disabled
+                onFocus={this.clearUsernameFocus()}
+                onBlur={this.onUsernameBlur()}
+                onKeyUp={this.setUserInfo("username")}
+              ></input>
+              <button
+                type="button"
+                className="userEditButton"
+                ref={this.userEditButtonRef}
+                onClick={this.handleUserEditValue()}
+              >
+                Edit
+              </button>
+            </div>
+            <div>
+              <input
+                type="text"
+                placeholder={this.state.email}
+                id="emailBox"
+                onChange={this.handleInputValue("email")}
+                ref={this.emailRef}
+                disabled
+                onFocus={this.clearEmailFocus()}
+                onBlur={this.onEmailBlur()}
+                onKeyUp={this.setUserInfo("email")}
+              ></input>
+              <button
+                type="button"
+                className="emailEditButton"
+                ref={this.emailEditButtonRef}
+                onClick={this.handleEmailEditValue()}
+              >
+                Edit
+              </button>
+            </div>
+
             <input
               type="text"
-              placeholder={this.state.username}
-              id="usernameBox"
-              onChange={this.handleInputValue("username")}
-              ref={this.userRef}
+              placeholder={this.state.password}
+              id="passwordBox"
+              onChange={this.handleInputValue("password")}
+              ref={this.passwordRef}
               disabled
-              onFocus={this.clearUsernameFocus()}
-              onBlur={this.onUsernameBlur()}
-              onKeyUp={this.setUserInfo("username")}
+              onFocus={this.clearPasswordFocus()}
+              onBlur={this.onPasswordBlur()}
+              onKeyUp={this.setUserInfo("password")}
             ></input>
             <button
               type="button"
-              className="userEditButton"
-              ref={this.userEditButtonRef}
-              onClick={this.handleUserEditValue()}
+              className="passwordEditButton"
+              ref={this.passwordEditButtonRef}
+              onClick={this.handlePasswordEditValue()}
             >
               Edit
             </button>
           </div>
-          <div>
-            <input
-              type="text"
-              placeholder={this.state.email}
-              id="emailBox"
-              onChange={this.handleInputValue("email")}
-              ref={this.emailRef}
-              disabled
-              onFocus={this.clearEmailFocus()}
-              onBlur={this.onEmailBlur()}
-              onKeyUp={this.setUserInfo("email")}
-            ></input>
-            <button
-              type="button"
-              className="emailEditButton"
-              ref={this.emailEditButtonRef}
-              onClick={this.handleEmailEditValue()}
-            >
-              Edit
-            </button>
+
+          {/* ㅁ */}
+          <div className="userStatisticsTitle">Statistics</div>
+
+          {/* 아래는 그래프 부분입니다. 참고하세요 */}
+          <div className="body">
+            <div align="center" className="statisticsBox">
+              <DonutChart
+                width={400}
+                height={260}
+                className="donut"
+                data={[
+                  {
+                    label: "완료",
+                    value: this.state.completeCount
+                  },
+                  {
+                    label: "미완료",
+                    value: this.state.todoCount - this.state.completeCount,
+                    isEmpty: true
+                  }
+                ]}
+              />
+
+              <h4 align="center">작성한 Mustodo 수: {this.state.todoCount}</h4>
+            </div>
           </div>
+          {/* 그래프 끝 */}
 
-          <input
-            type="text"
-            placeholder={this.state.password}
-            id="passwordBox"
-            onChange={this.handleInputValue("password")}
-            ref={this.passwordRef}
-            disabled
-            onFocus={this.clearPasswordFocus()}
-            onBlur={this.onPasswordBlur()}
-            onKeyUp={this.setUserInfo("password")}
-          ></input>
-          <button
-            type="button"
-            className="passwordEditButton"
-            ref={this.passwordEditButtonRef}
-            onClick={this.handlePasswordEditValue()}
-          >
-            Edit
-          </button>
+          {/* <Calendar onChange={this.onChange} value={this.state.date} /> */}
         </div>
-
-        {/* ㅁ */}
-        <div className="userStatisticsTitle">Statistics</div>
-
-        {/* 아래는 그래프 부분입니다. 참고하세요 */}
-        <div className="body">
-          <div align="center" className="statisticsBox">
-            <DonutChart
-              width={400}
-              height={260}
-              className="donut"
-              data={[
-                {
-                  label: "완료",
-                  value: this.state.completeCount
-                },
-                {
-                  label: "미완료",
-                  value: this.state.todoCount - this.state.completeCount,
-                  isEmpty: true
-                }
-              ]}
-            />
-
-            <h4 align="center">작성한 Mustodo 수: {this.state.todoCount}</h4>
-          </div>
-        </div>
-        {/* 그래프 끝 */}
-
-        {/* <Calendar onChange={this.onChange} value={this.state.date} /> */}
-      </div>
-    );
+      );
+    } else {
+      return <Redirect to="/notloggedin" />;
+    }
   }
-
 }
 
 export default Mypage;
