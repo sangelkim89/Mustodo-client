@@ -34,11 +34,11 @@ class Todopage extends React.Component {
       data: {
         data: { todoid, status }
       }
-    } = await axios.post("http://localhost:4000/todo/info", {
+    } = await axios.post("http://18.191.193.104:4000/todo/info", {
       todoid: id
     });
 
-    axios.post("http://localhost:4000/todo/status", {
+    axios.post("http://18.191.193.104:4000/todo/status", {
       todoid: todoid,
       status: !status
     });
@@ -58,10 +58,10 @@ class Todopage extends React.Component {
       //💌login 중인 userId가져오기
       const {
         data: { id }
-      } = await axios.post("http://localhost:4000/user/getid");
+      } = await axios.post("http://18.191.193.104:4000/user/getid");
 
       //💌todo 추가된 거 api로 보내userId 넣어서 보내주기
-      await axios.post("http://localhost:4000/todo/add", {
+      await axios.post("http://18.191.193.104:4000/todo/add", {
         userid: id,
         todoid: nextID,
         todoitem: inputTodo,
@@ -85,7 +85,7 @@ class Todopage extends React.Component {
   };
   remove = (...arr) => {
     //💌api에서 같은 아이디 찾아서 삭제해주기
-    axios.post("http://localhost:4000/todo/delete", {
+    axios.post("http://18.191.193.104:4000/todo/delete", {
       todoid: arr[0][0],
       todoitem: arr[0][1]
     });
@@ -103,7 +103,7 @@ class Todopage extends React.Component {
     //[{},{},{}]
     const { todos } = this.state;
     axios
-      .get("http://localhost:4000/user/todopage")
+      .get("http://18.191.193.104:4000/user/todopage")
       .then(res => {
         this.setState({ todos: todos.concat(res.data) });
       })
@@ -132,7 +132,7 @@ class Todopage extends React.Component {
 
     let data = { createdAt: chosenDate };
 
-    axios.post("http://localhost:4000/calendar", data).then(res => {
+    axios.post("http://18.191.193.104:4000/calendar", data).then(res => {
       if (res.data.length > 0) {
         this.setState({
           CalendarData: res.data
