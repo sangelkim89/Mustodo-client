@@ -8,37 +8,49 @@ import {
 import axios from "axios";
 import Homepage from "../src/pages/homepage";
 import Login from "../src/pages/login";
-import Mypage from "../src/pages/mypage";
+import Mypage from "./pages/mypage";
 import Signup from "../src/pages/signup";
 import Todopage from "../src/pages/todopage";
-
+import Timer from "../src/pages/timer";
+import LoggedInHomepage from "../src/pages/loggedInHomepage";
+import NotLoggedIn from "../src/pages/notLoggedIn";
 axios.defaults.withCredentials = true;
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isLogin: false,
-      userinfo: {},
-      DBtodos: ""
-    };
-    this.handleIsLoginChange = this.handleIsLoginChange.bind(this);
-  }
+  state = {
+    isLogin: false
+  };
   handleIsLoginChange = () => {
-    // this.setState({ isLogin: true });
-    const savedTodoData = axios.get("http://localhost:4000/user/todopage");
-    this.setState({
-      isLogin: true,
-      DBtodos: savedTodoData
-    });
+    this.setState({ isLogin: true });
+  };
+  logOut = () => {
+    axios
+      .get("http://localhost:4000/user/logout")
+      .then(res => {
+        this.setState({ isLogin: false });
+      })
+      .catch(err => console.log(err));
   };
   render() {
-    const { isLogin, userinfo, DBtodos } = this.state;
+    const { isLogin } = this.state;
     return (
       <>
-        <h1>MusToDo</h1>
+        <Timer />
         <Router>
           <Switch>
-            <Route path="/" exact component={Homepage} />
+            <Route
+              exact
+              path="/"
+              render={() => {
+                return <Homepage isLogin={isLogin} />;
+              }}
+            />
+            />
+            <Route
+              path="/loggedhome"
+              render={() => (
+                <LoggedInHomepage isLogin={isLogin} logOut={this.logOut} />
+              )}
+            />
             <Route
               path="/login"
               render={() => (
@@ -46,14 +58,26 @@ class App extends React.Component {
               )}
             />
             <Route
-              path="/mypage"
               exact
-              component={Mypage}
-              userInfo={userinfo}
+              path="/signup"
+              render={() => <Signup isLogin={isLogin} />}
             />
-            <Route path="/signup" exact component={Signup} />
-            <Route path="/todopage" exact component={Todopage} />
-            <Redirect from="*" to="/"></Redirect>
+            <Route
+              exact
+              path="/mypage"
+              render={() => <Mypage isLogin={isLogin} logOut={this.logOut} />}
+            />
+            <Route
+              exact
+              path="/notloggedin"
+              render={() => <NotLoggedIn isLogin={isLogin} />}
+            />
+            <Route
+              exact
+              path="/todopage"
+              render={() => <Todopage isLogin={isLogin} logOut={this.logOut} />}
+            />
+            {/* {!isLogin ? <Redirect from="*" to="/login" /> : <Redirect from="*" to="/" />} */}
           </Switch>
         </Router>
       </>
