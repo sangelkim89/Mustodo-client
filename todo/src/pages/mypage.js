@@ -1,3 +1,4 @@
+
 import React from "react";
 import { withRouter, Link, useHistory } from "react-router-dom";
 import axios from "axios";
@@ -160,14 +161,16 @@ class Mypage extends React.Component {
         [key]: e.target.value
       };
 
-      // console.log("changeData is: ", changeData);
-      // console.log("e is: ", e);
-      // axios
-      //   .put("http://localhost:4000/user/edit", changeData)
-      //   .then(res => {
-      //     this.setState({ [key]: e.target.value });
-      //   })
-      //   .catch(err => console.log(err));
+
+			// console.log("changeData is: ", changeData);
+			// console.log("e is: ", e);
+			// axios
+			//   .put("http://localhost:4000/user/edit", changeData)
+			//   .then(res => {
+			//     this.setState({ [key]: e.target.value });
+			//   })
+			//   .catch(err => console.log(err));
+
 
       try {
         axios.put("http://localhost:4000/user/edit", changeData);
@@ -314,6 +317,7 @@ class Mypage extends React.Component {
       </div>
     );
   }
+
 }
 
 export default Mypage;
