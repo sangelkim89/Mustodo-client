@@ -22,7 +22,6 @@ class Homepage extends React.Component {
         <center>
           안녕하세여 아래에 이미지 또는 gif를 추가할 예정이랍니다.
         </center>
-
       </div>
     );
   }

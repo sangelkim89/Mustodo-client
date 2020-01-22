@@ -31,7 +31,6 @@ class App extends React.Component {
         <a href="/">
           <h1>Must to do </h1>
         </a>
-
         <Timer />
         <Router>
           <Switch>
