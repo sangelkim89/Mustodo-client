@@ -1,148 +1,157 @@
 .body {
-  background: linear-gradient(lightsalmon, white, rgb(6, 41, 2), blue);
+  background: white;
 }
-.myPageTitle {
-  display: inline-block;
-  border-radius: 5px;
-  width: 400px;
-  font-size: 40px;
-  left: 37%;
-  top: 100px;
-  position: relative;
-  border: 1px solid black;
-  background: linear-gradient(hotpink, white, green, blue, rgb(143, 125, 23));
 
-  color: green;
-}
-.loginRedirectButton {
-  width: 200px;
-  height: 30px;
-  margin: 5px;
-  border-radius: 5px;
-  font: bold 25px Arial;
+/* 로그아웃 버튼 */
+.loginRedirectButton1 {
   text-decoration: none;
-  background-color: #e74c3c;
-  color: #333333;
-  padding: 2px 6px 2px 6px;
-  border-top: 1px solid #cccccc;
-  border-right: 1px solid #333333;
-  border-bottom: 1px solid #333333;
-  border-left: 1px solid #cccccc;
-}
-.userInfoTitle {
-  position: relative;
+  margin: auto;
   display: inline-block;
-  top: 200px;
-  left: 20%;
-  width: 300px;
+  border-radius: 4px;
+  width: 100px;
+  font-size: 20px;
+  left: 75%;
+  top: 48px; /* top은 화면상 위에서 얼만큼 떨어져있는지 */
+  position: relative;
+  background: #22cfbb;
+  color: white;
   text-align: center;
-  font-size: 30px;
-  border: 1px solid black;
-  border-radius: 5px;
-  /* background-color: #e74c3c; */
-  background: linear-gradient(
-    hotpink,
-    rgb(243, 0, 0),
-    green,
-    blue,
-    rgb(143, 125, 23)
-  );
-  color: black;
 }
-.userStatisticsTitle {
-  position: relative;
+/* todo page 버튼 */
+.loginRedirectButton2 {
+  text-decoration: none;
+  margin: auto;
   display: inline-block;
-  top: 200px;
-  left: 41%;
-  width: 300px;
+  border-radius: 4px;
+  width: 100px;
+  font-size: 20px;
+  left: 75%;
+  top: 48px;
+  position: relative;
+  background: #22cfbb;
+  color: white;
   text-align: center;
-  font-size: 30px;
-  border: 1px solid black;
-  border-radius: 5px;
-  background: linear-gradient(hotpink, black, green, blue, rgb(143, 125, 23));
-
-  color: lightsalmon;
 }
-.statisticsBox {
-  display: inline-block;
-  border: 1px solid black;
-  border-radius: 5px;
-  background-color: #ecf0f1;
-  height: 500px;
-  width: 450px;
-  position: relative;
-  top: 30px;
-  left: 53%;
-  padding: 10px;
-}
-.circleChart {
-  position: relative;
+/* Mypage */
+.myPageTitle {
+  text-decoration: none;
+  margin: auto;
+  border-radius: 4px;
+  width: 700px;
+  height: 50px;
+  font-size: 20px;
   display: flex;
-  left: 20%;
+  align-items: center;
+  justify-content: center;
+  top: 0px;
+  position: relative;
+  background: #228dcf;
+  color: white;
+  text-align: center;
 }
+
+/* User Info */
+.userInfoTitle {
+  text-decoration: none;
+  margin: auto;
+  width: 700px;
+  height: 50px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0px;
+  position: relative;
+  background: #22b8cf;
+  color: white;
+  text-align: center;
+}
+
+/* staticstic */
+.userStatisticsTitle {
+  text-decoration: none;
+  margin: auto;
+  width: 700px;
+  height: 50px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0px;
+  position: relative;
+  background: #22b8cf;
+  color: white;
+  text-align: center;
+}
+
+/* user name */
 #usernameBox {
   position: relative;
-  display: flex;
-  top: 250px;
-  left: 17%;
-  width: 400px;
+  display: inline-block;
+  top: 0px; /* top은 화면상 위에서 얼만큼 떨어져있는지 */
+  left: 25%; /* left은 화면상 왼쪽에서 얼만큼 떨어져있는지 */
+  width: 695px;
+  height: 45px;
   text-align: center;
-  font-size: 30px;
-  border: 1px solid black;
-  border-radius: 5px;
-  background-color: #ecf0f1;
+  font-size: 25px;
 }
-.userEditButton {
-  position: relative;
-  top: 216px;
-  left: 40%;
-  width: 70px;
-  height: 30px;
-  font-size: 20px;
-  color: #ff6b6b;
-}
+
+/* email */
 #emailBox {
   position: relative;
-  display: flex;
-  top: 300px;
-  left: 17%;
-  width: 400px;
+  display: inline-block;
+  top: 0px; /* top은 화면상 위에서 얼만큼 떨어져있는지 */
+  left: 25%; /* left은 화면상 왼쪽에서 얼만큼 떨어져있는지 */
+  width: 695px;
+  height: 45px;
   text-align: center;
-  font-size: 30px;
-  border: 1px solid black;
-  border-radius: 5px;
-  background-color: #ecf0f1;
+  font-size: 25px;
 }
-.emailEditButton {
-  position: relative;
-  top: 267px;
-  left: 40%;
-  width: 70px;
-  height: 30px;
-  font-size: 20px;
-  color: #ff6b6b;
-}
+
+/* password */
 #passwordBox {
   position: relative;
-  display: flex;
-  top: 350px;
-  left: 17%;
-  width: 400px;
+  display: inline-block;
+  top: 0px; /* top은 화면상 위에서 얼만큼 떨어져있는지 */
+  left: 25%; /* left은 화면상 왼쪽에서 얼만큼 떨어져있는지 */
+  width: 695px;
+  height: 45px;
   text-align: center;
-  font-size: 30px;
-  border: 1px solid black;
-  border-radius: 5px;
-  background-color: #ecf0f1;
+  font-size: 25px;
 }
-.passwordEditButton {
+
+/* edit:user name */
+.userEditButton {
   position: relative;
-  top: 317px;
-  left: 40%;
+  top: 0px;
+  left: 19%;
   width: 70px;
   height: 30px;
   font-size: 20px;
   color: #ff6b6b;
 }
+
+/* edit : email */
+.emailEditButton {
+  position: relative;
+  top: 0px;
+  left: 19%;
+  width: 70px;
+  height: 30px;
+  font-size: 20px;
+  color: #ff6b6b;
+}
+/* edit : password */
+.passwordEditButton {
+  position: relative;
+  top: 0px;
+  left: 19%;
+  width: 70px;
+  height: 30px;
+  font-size: 20px;
+  color: #ff6b6b;
+}
+
 input:focus {
   background-color: white;
 }
@@ -155,4 +164,16 @@ input.visited {
   top: 22%;
   font-size: 40px;
   font-style: italic;
+}
+
+/* 그래프 회색 박스 및 그래프 위치 */
+.statisticsBox {
+  top: 0px;
+  display: inline-block;
+  background-color: #ecf0f1;
+  height: 260px;
+  width: 680px;
+  position: relative;
+  left: 25%;
+  padding: 10px;
 }
