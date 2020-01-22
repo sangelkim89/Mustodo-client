@@ -142,9 +142,11 @@ class Todopage extends React.Component {
       todos: filterArray
     });
   };
+
   componentDidMount() {
     //💌😀api에서 todoList요청 불러와서 this.state.Todos에 concat
     //[{},{},{}]
+
     const { todos } = this.state;
     axios
       .get("http://localhost:4000/user/todopage")
@@ -155,8 +157,8 @@ class Todopage extends React.Component {
   }
   render() {
     const { todos } = this.state;
-    let isLoggedIn = this.state.isLogin;
-    if (isLoggedIn) {
+    let isLoggedIn = this.props.isLogin;
+    if (isLoggedIn === true) {
       return (
         <>
           <div style={{ padding: "10px", float: "right" }} className="body">

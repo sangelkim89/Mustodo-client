@@ -83,7 +83,11 @@ class App extends React.Component {
                 <Todopage isLogin={isLogin} logOut={this.logOut.bind(this)} />
               )}
             />
-            {/* {!isLogin ? <Redirect from="*" to="/login" /> : <Redirect from="*" to="/" />} */}
+            {isLogin ? (
+              <Redirect from="/todopage" to="/todopage" />
+            ) : (
+              <Redirect from="/todopage" to="/notloggedin" />
+            )}
           </Switch>
         </Router>
       </>
