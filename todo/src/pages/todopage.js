@@ -56,7 +56,20 @@ class Todopage extends React.Component {
   plusTodo = async inputTodo => {
     const { todos, nextID } = this.state;
     try {
-      //
+      //시간 가져오기
+      let date = new Date();
+      let year = date.getFullYear();
+      let month = date.getMonth() + 1;
+      let day = date.getUTCDate() + 1;
+      day === 32 ? (day = 1) : (day = day);
+      month === 13 ? (month = 1) : (month = month);
+
+      let time = `${year}-${month < 10 ? `0${month}` : month}-${
+        day < 10 ? `0${day}` : day
+      }`;
+
+      console.log(time); //2020-01-23 04:22:56
+
       //💌login 중인 userId가져오기
       const {
         data: { id }
@@ -65,14 +78,15 @@ class Todopage extends React.Component {
       //💌todo 추가된 거 api로 보내userId 넣어서 보내주기
       await axios.post("http://localhost:4000/todo/add", {
         userid: id,
-        todoid: nextID,
+        todoid: nextID + inputTodo,
         todoitem: inputTodo,
-        status: false
+        status: false,
+        time: time
       });
       //😀this.state  관리 하는 부분
       const nextTodo = {
         userid: id,
-        todoid: nextID,
+        todoid: nextID + inputTodo,
         todoitem: inputTodo,
         status: false
       };
@@ -122,6 +136,7 @@ class Todopage extends React.Component {
         : date.getDate() < 9
         ? "0" + date.getDate() + ""
         : date.getDate() + "";
+    console.log(getDate);
     let getYear = date.getFullYear() + "";
     let getMonth =
       date.getMonth() === 0
@@ -132,8 +147,8 @@ class Todopage extends React.Component {
 
     let chosenDate = getYear + "-" + getMonth + "-" + getDate;
 
-    let data = { createdAt: chosenDate };
-
+    let data = { time: chosenDate };
+    console.log(data);
     axios.post("http://localhost:4000/calendar", data).then(res => {
       if (res.data.length > 0) {
         this.setState({
@@ -160,11 +175,6 @@ class Todopage extends React.Component {
               My Page
             </Link>
           </div>
-          <div className="linkLoggedHome">
-            <Link style={{ color: "white" }} to="/loggedhome">
-              Home Page
-            </Link>
-          </div>
         </div>
 
         <div className="header" />
@@ -176,6 +186,8 @@ class Todopage extends React.Component {
           />
           <SelectedCalendarData selectedCalendarData={CalendarData} />
         </div>
+        <CountTimer />
+        <Weather />
         <TodoTemplate>
           <TodoInsert plusTodo={this.plusTodo} />
           <TodoList
@@ -184,8 +196,6 @@ class Todopage extends React.Component {
             onToggle={this.onToggle}
           />
         </TodoTemplate>
-        <CountTimer />
-        <Weather />
       </>
     );
   }

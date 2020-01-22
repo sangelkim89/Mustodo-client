@@ -3,16 +3,9 @@ import { withRouter, Link, useHistory, Redirect } from "react-router-dom";
 import axios from "axios";
 import "./mypage.css";
 import DonutChart from "react-donut-chart";
-import Timer from "./timer";
-import { MdSignalWifi1BarLock } from "react-icons/md";
-//import Calendar from "react-calendar";
+
 axios.defaults.withCredentials = true;
-//data =
-// {
-//   userinfo:{},
-//   todoCount: int,
-//   completeCount: int
-// }
+
 class Mypage extends React.Component {
   //dont forget to rupdate states with props!
   constructor(props) {
@@ -154,14 +147,7 @@ class Mypage extends React.Component {
       let changeData = {
         [key]: e.target.value
       };
-      // console.log("changeData is: ", changeData);
-      // console.log("e is: ", e);
-      // axios
-      //   .put("http://localhost:4000/user/edit", changeData)
-      //   .then(res => {
-      //     this.setState({ [key]: e.target.value });
-      //   })
-      //   .catch(err => console.log(err));
+
       try {
         axios.put("http://localhost:4000/user/edit", changeData);
       } catch (error) {
@@ -189,124 +175,96 @@ class Mypage extends React.Component {
   render() {
     return (
       <>
-        <div className="linkBox">
-          <div className="linkLogout">
+        <div className="myPageLinkBox">
+          <div className="myPageHomePage">
             <Link style={{ color: "white" }} onClick={this.props.logOut} to="/">
               Log Out
             </Link>
           </div>
-          <div className="linkMypage">
+
+          <div className="myPageTodoPage">
             <Link style={{ color: "white" }} to="/todopage">
               Todo Page
             </Link>
           </div>
-          <div className="linkLoggedHome">
-            <Link style={{ color: "white" }} to="/loggedhome">
-              Home Page
-            </Link>
-          </div>
         </div>
 
-        <div className="header" />
-
-        <div className="body">
-          {/* homepage, todopage, log out 버튼 구간입니다. */}
-          <div className="body">
-            <div style={{ padding: "10px", float: "right" }} className="body">
-              <Link className="loginRedirectButton" to="/loggedhome">
-                Home Page
-              </Link>
-            </div>
-            <div style={{ padding: "10px", float: "right" }} className="body">
-              <Link className="loginRedirectButton" to="/todopage">
-                Todo Page
-              </Link>
-            </div>
-            <div style={{ padding: "10px", float: "right" }} className="body">
-              <Link
-                className="loginRedirectButton"
-                onClick={this.props.logOut}
-                to="/"
-              >
-                Log Out
-              </Link>
-            </div>
-          </div>
-          {/* Mypage, User info 타이틀 구간입니다. */}
+        <div className="fatherBox">
           <div className="myPageTitle">My Page</div>
+
           <div className="userInfoTitle">User Info</div>
-          {/* username, email, password 수정하는 칸 구간입니다. */}
-          <div className="editBoxinput">
+          {/* ㅁ */}
+          <div className="editInputButtonFatherBox">
             <input
-              id="editBox"
               type="text"
               placeholder={this.state.username}
+              id="usernameBox"
               onChange={this.handleInputValue("username")}
               ref={this.userRef}
               disabled
               onFocus={this.clearUsernameFocus()}
               onBlur={this.onUsernameBlur()}
               onKeyUp={this.setUserInfo("username")}
+              className="userEditInput"
             ></input>
             <button
               type="button"
-              className="EditButton"
+              className="hoverButton userEditButton"
               ref={this.userEditButtonRef}
               onClick={this.handleUserEditValue()}
             >
               Edit
             </button>
           </div>
-
-          <div className="editBoxinput">
+          <div className="editInputButtonFatherBox">
             <input
-              id="editBox"
               type="text"
               placeholder={this.state.email}
+              id="emailBox"
               onChange={this.handleInputValue("email")}
               ref={this.emailRef}
               disabled
               onFocus={this.clearEmailFocus()}
               onBlur={this.onEmailBlur()}
               onKeyUp={this.setUserInfo("email")}
+              className="emailEditInput"
             ></input>
             <button
               type="button"
-              className="EditButton"
+              className="hoverButton emailEditButton"
               ref={this.emailEditButtonRef}
               onClick={this.handleEmailEditValue()}
             >
               Edit
             </button>
           </div>
-
-          <div className="editBoxinput">
+          <div className="editInputButtonFatherBox">
             <input
-              id="editBox"
               type="text"
               placeholder={this.state.password}
+              id="passwordBox"
               onChange={this.handleInputValue("password")}
               ref={this.passwordRef}
               disabled
               onFocus={this.clearPasswordFocus()}
               onBlur={this.onPasswordBlur()}
               onKeyUp={this.setUserInfo("password")}
+              className="passwordEditInput"
             ></input>
             <button
               type="button"
-              className="EditButton"
+              className="hoverButton passwordEditButton"
               ref={this.passwordEditButtonRef}
               onClick={this.handlePasswordEditValue()}
             >
               Edit
             </button>
           </div>
-
           {/* ㅁ */}
           <div className="userStatisticsTitle">Statistics</div>
           {/* 아래는 그래프 부분입니다. 참고하세요 */}
 
-          <div className="statisticsBox">
+          <div align="center" className="statisticsBox">
             <DonutChart
               width={400}
               height={260}
