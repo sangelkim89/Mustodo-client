@@ -3,6 +3,7 @@ import { withRouter, Link, useHistory, Redirect } from "react-router-dom";
 import axios from "axios";
 import "./mypage.css";
 import DonutChart from "react-donut-chart";
+import Timer from "./timer";
 import { MdSignalWifi1BarLock } from "react-icons/md";
 //import Calendar from "react-calendar";
 axios.defaults.withCredentials = true;
@@ -187,124 +188,148 @@ class Mypage extends React.Component {
   };
   render() {
     return (
-      <div className="body">
-        {/* homepage, todopage, log out 버튼 구간입니다. */}
-        <div className="body">
-          <div style={{ padding: "10px", float: "right" }} className="body">
-            <Link className="loginRedirectButton" to="/loggedhome">
-              Home Page
-            </Link>
-          </div>
-          <div style={{ padding: "10px", float: "right" }} className="body">
-            <Link className="loginRedirectButton" to="/todopage">
-              Todo Page
-            </Link>
-          </div>
-          <div style={{ padding: "10px", float: "right" }} className="body">
-            <Link
-              className="loginRedirectButton"
-              onClick={this.props.logOut}
-              to="/"
-            >
+      <>
+        <div className="linkBox">
+          <div className="linkLogout">
+            <Link style={{ color: "white" }} onClick={this.props.logOut} to="/">
               Log Out
             </Link>
           </div>
-        </div>
-        {/* Mypage, User info 타이틀 구간입니다. */}
-        <div className="myPageTitle">My Page</div>
-        <div className="userInfoTitle">User Info</div>
-        {/* username, email, password 수정하는 칸 구간입니다. */}
-        <div className="editBoxinput">
-          <input
-            id="editBox"
-            type="text"
-            placeholder={this.state.username}
-            onChange={this.handleInputValue("username")}
-            ref={this.userRef}
-            disabled
-            onFocus={this.clearUsernameFocus()}
-            onBlur={this.onUsernameBlur()}
-            onKeyUp={this.setUserInfo("username")}
-          ></input>
-          <button
-            type="button"
-            className="EditButton"
-            ref={this.userEditButtonRef}
-            onClick={this.handleUserEditValue()}
-          >
-            Edit
-          </button>
+          <div className="linkMypage">
+            <Link style={{ color: "white" }} to="/todopage">
+              Todo Page
+            </Link>
+          </div>
+          <div className="linkLoggedHome">
+            <Link style={{ color: "white" }} to="/loggedhome">
+              Home Page
+            </Link>
+          </div>
         </div>
 
-        <div className="editBoxinput">
-          <input
-            id="editBox"
-            type="text"
-            placeholder={this.state.email}
-            onChange={this.handleInputValue("email")}
-            ref={this.emailRef}
-            disabled
-            onFocus={this.clearEmailFocus()}
-            onBlur={this.onEmailBlur()}
-            onKeyUp={this.setUserInfo("email")}
-          ></input>
-          <button
-            type="button"
-            className="EditButton"
-            ref={this.emailEditButtonRef}
-            onClick={this.handleEmailEditValue()}
-          >
-            Edit
-          </button>
-        </div>
+        <div className="header" />
 
-        <div className="editBoxinput">
-          <input
-            id="editBox"
-            type="text"
-            placeholder={this.state.password}
-            onChange={this.handleInputValue("password")}
-            ref={this.passwordRef}
-            disabled
-            onFocus={this.clearPasswordFocus()}
-            onBlur={this.onPasswordBlur()}
-            onKeyUp={this.setUserInfo("password")}
-          ></input>
-          <button
-            type="button"
-            className="EditButton"
-            ref={this.passwordEditButtonRef}
-            onClick={this.handlePasswordEditValue()}
-          >
-            Edit
-          </button>
-        </div>
+        <div className="body">
+          {/* homepage, todopage, log out 버튼 구간입니다. */}
+          <div className="body">
+            <div style={{ padding: "10px", float: "right" }} className="body">
+              <Link className="loginRedirectButton" to="/loggedhome">
+                Home Page
+              </Link>
+            </div>
+            <div style={{ padding: "10px", float: "right" }} className="body">
+              <Link className="loginRedirectButton" to="/todopage">
+                Todo Page
+              </Link>
+            </div>
+            <div style={{ padding: "10px", float: "right" }} className="body">
+              <Link
+                className="loginRedirectButton"
+                onClick={this.props.logOut}
+                to="/"
+              >
+                Log Out
+              </Link>
+            </div>
+          </div>
+          {/* Mypage, User info 타이틀 구간입니다. */}
+          <div className="myPageTitle">My Page</div>
+          <div className="userInfoTitle">User Info</div>
+          {/* username, email, password 수정하는 칸 구간입니다. */}
+          <div className="editBoxinput">
+            <input
+              id="editBox"
+              type="text"
+              placeholder={this.state.username}
+              onChange={this.handleInputValue("username")}
+              ref={this.userRef}
+              disabled
+              onFocus={this.clearUsernameFocus()}
+              onBlur={this.onUsernameBlur()}
+              onKeyUp={this.setUserInfo("username")}
+            ></input>
+            <button
+              type="button"
+              className="EditButton"
+              ref={this.userEditButtonRef}
+              onClick={this.handleUserEditValue()}
+            >
+              Edit
+            </button>
+          </div>
 
-        {/* ㅁ */}
-        <div className="userStatisticsTitle">Statistics</div>
-        {/* 아래는 그래프 부분입니다. 참고하세요 */}
-        <div align="center" className="statisticsBox">
-          <DonutChart
-            width={400}
-            height={260}
-            className="donut"
-            data={[
-              {
-                label: "완료",
-                value: this.state.completeCount
-              },
-              {
-                label: "미완료",
-                value: this.state.todoCount - this.state.completeCount,
-                isEmpty: true
-              }
-            ]}
-          />
-          <h4 align="center">작성한 Mustodo 수: {this.state.todoCount}</h4>
+          <div className="editBoxinput">
+            <input
+              id="editBox"
+              type="text"
+              placeholder={this.state.email}
+              onChange={this.handleInputValue("email")}
+              ref={this.emailRef}
+              disabled
+              onFocus={this.clearEmailFocus()}
+              onBlur={this.onEmailBlur()}
+              onKeyUp={this.setUserInfo("email")}
+            ></input>
+            <button
+              type="button"
+              className="EditButton"
+              ref={this.emailEditButtonRef}
+              onClick={this.handleEmailEditValue()}
+            >
+              Edit
+            </button>
+          </div>
+
+          <div className="editBoxinput">
+            <input
+              id="editBox"
+              type="text"
+              placeholder={this.state.password}
+              onChange={this.handleInputValue("password")}
+              ref={this.passwordRef}
+              disabled
+              onFocus={this.clearPasswordFocus()}
+              onBlur={this.onPasswordBlur()}
+              onKeyUp={this.setUserInfo("password")}
+            ></input>
+            <button
+              type="button"
+              className="EditButton"
+              ref={this.passwordEditButtonRef}
+              onClick={this.handlePasswordEditValue()}
+            >
+              Edit
+            </button>
+          </div>
+
+          {/* ㅁ */}
+          <div className="userStatisticsTitle">Statistics</div>
+          {/* 아래는 그래프 부분입니다. 참고하세요 */}
+
+          <div className="statisticsBox">
+            <DonutChart
+              width={400}
+              height={260}
+              className="donut"
+              data={[
+                {
+                  label: "완료",
+                  value: this.state.completeCount
+                },
+                {
+                  label: "미완료",
+                  value: this.state.todoCount - this.state.completeCount,
+                  isEmpty: true
+                }
+              ]}
+            />
+            <h4 align="center">작성한 Mustodo 수: {this.state.todoCount}</h4>
+          </div>
+
+          {/* 그래프 끝 */}
+          {/* <Calendar onChange={this.onChange} value={this.state.date} /> */}
         </div>
-        {/* 그래프 끝 */}
-        {/* <Calendar onChange={this.onChange} value={this.state.date} /> */}
-      </div>
+      </>
     );
   }
 }
