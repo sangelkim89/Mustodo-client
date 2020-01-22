@@ -18,7 +18,7 @@ const TodoListItem = ({ todo, remove, onToggle }) => {
         {status ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}
         <div className="text">{todoitem}</div>
       </div>
-      <div className="remove" onClick={() => remove(todoid)}>
+      <div className="remove" onClick={() => remove([todoid, todoitem])}>
         <MdDeleteForever />
       </div>
     </div>
