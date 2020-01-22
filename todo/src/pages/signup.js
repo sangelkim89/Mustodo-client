@@ -21,13 +21,16 @@ class Signup extends React.Component {
 	render() {
 		const { username, email, password } = this.state;
 		return (
-			<div>
-				<div>
-					<Link className="loginRedirectButton" to="/login">
-						Login Page
-					</Link>
+			<>
+				<div className="signUpLinkBox">
+					<div className="signUpLogin">
+						<Link style={{ color: 'white' }} to="/login">
+							Login Page
+						</Link>
+					</div>
 				</div>
-				<center>
+				<div className="signUpheader" />
+				<center className="signUpTemplate">
 					<h1>Sign Up</h1>
 					<form
 						onSubmit={e => {
@@ -89,7 +92,7 @@ class Signup extends React.Component {
 								height: '30px',
 								margin: '5px',
 								borderRadius: '5px',
-								backgroundColor: 'skyblue'
+								backgroundColor: '#eb4d4b'
 							}}
 							type="submit"
 						>
@@ -97,7 +100,7 @@ class Signup extends React.Component {
 						</button>
 					</form>
 				</center>
-			</div>
+			</>
 		);
 	}
 }
