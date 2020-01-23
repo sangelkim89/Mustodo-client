@@ -60,7 +60,7 @@ class Todopage extends React.Component {
       let date = new Date();
       let year = date.getFullYear();
       let month = date.getMonth() + 1;
-      let day = date.getUTCDate() + 1;
+      let day = date.getUTCDate();
       day === 32 ? (day = 1) : (day = day);
       month === 13 ? (month = 1) : (month = month);
 
